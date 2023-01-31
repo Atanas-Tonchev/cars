@@ -7,7 +7,7 @@ public class Car {
     Identification identification;
     EngineStatistics engineStatistics;
 
-    public void Car(Dimensions dimensions, EngineInformation engineInformation,
+    public Car(Dimensions dimensions, EngineInformation engineInformation,
                FuelInformation fuelInformation, Identification identification,
                EngineStatistics engineStatistics) {
         this.dimensions = dimensions;

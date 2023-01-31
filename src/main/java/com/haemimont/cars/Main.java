@@ -5,7 +5,10 @@ import com.haemimont.cars.database.DataBaseUtil;
 import com.haemimont.cars.database.MyDataBase;
 import com.haemimont.cars.model.Car;
 import com.haemimont.cars.storage.Storage;
+import com.haemimont.cars.util.Util;
+import com.opencsv.CSVReader;
 
+import java.io.FileReader;
 import java.sql.Connection;
 import java.util.Objects;
 
@@ -16,22 +19,15 @@ public class Main {
         String url = "";
         Connection connection = dataBase.connect(url);
 
-        Storage<Object, Car> carStorage = loadCarStorage();
+        boolean isDatabaseEmpty = true;
 
-        if (bazataEPrazna) {
+        Storage<Object, Car> carStorage = Util.loadCarStorage("file.csv");
+
+        if (isDatabaseEmpty) {
             DataBaseUtil.initDB(connection, carStorage);
         }
-
-        ////
-        ///
-        ///
-        ///
 
         dataBase.disconnect(connection);
     }
 
-    private static Storage<Object, Car> loadCarStorage() {
-
-        return null;
-    }
 }
