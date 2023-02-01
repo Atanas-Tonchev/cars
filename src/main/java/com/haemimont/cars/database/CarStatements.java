@@ -7,7 +7,9 @@ import java.sql.ResultSet;
 
 public class CarStatements {
 
+
     public static int insertCar(Car car, Connection connection) {
+
         int result = 0;
 
         String sqlCar = "INSERT INTO csv_cars_db.car (dimensions_dimensions_id," +
@@ -16,18 +18,14 @@ public class CarStatements {
                 "engine_information_engine_information_id) " +
                 "VALUES(?,?,?,?)";
 
+
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sqlCar,PreparedStatement.RETURN_GENERATED_KEYS);
 
-            int idDimension = insertDimension(car.getDimensions(), connection);
-            int idEngineInformation = insertEngineInformation(car.getEngineInformation(), connection);
-            int idFuelInformation = insertFuelInformation(car.getFuelInformation(), connection);
-            int idIdentification = insertIdentification(car.getIdentification(), connection);
-
-            preparedStatement.setInt(1,idDimension);
-            preparedStatement.setInt(2,idFuelInformation);
-            preparedStatement.setInt(3,idIdentification);
-            preparedStatement.setInt(4,idEngineInformation);
+            preparedStatement.setInt(1,insertDimension(car.getDimensions(),connection));
+            preparedStatement.setInt(2,insertFuelInformation(car.getFuelInformation(),connection));
+            preparedStatement.setInt(3,insertIdentification(car.getIdentification(),connection));
+            preparedStatement.setInt(4,insertEngineInformation(car.getEngineInformation(),connection));
 
             preparedStatement.executeUpdate();
 
@@ -47,7 +45,7 @@ public class CarStatements {
         return result;
     }
 
-    private static int insertEngineStatic(EngineStatistics engineStatistics, Connection connection) {
+    public static int insertEngineStatic(EngineStatistics engineStatistics, Connection connection) {
         int result = 0;
 
         String sqlStatic = "INSERT INTO csv_cars_db.engine_statistics (horsepower,torque) VALUES( ?,? )";
@@ -73,11 +71,10 @@ public class CarStatements {
         } catch (Exception e) {
             throw new RuntimeException();
         }
-
         return result;
     }
 
-    private static int insertIdentification(Identification identification, Connection connection) {
+    public static int insertIdentification(Identification identification, Connection connection) {
        int result = 0;
 
         try {
@@ -114,7 +111,7 @@ public class CarStatements {
         return result;
     }
 
-    private static int insertFuelInformation(FuelInformation fuelInformation, Connection connection) {
+    public static int insertFuelInformation(FuelInformation fuelInformation, Connection connection) {
         int result = 0;
 
         try {
@@ -145,25 +142,26 @@ public class CarStatements {
         return result;
     }
 
-    private static int insertEngineInformation(EngineInformation engineInformation, Connection connection)  {
+    public static int insertEngineInformation(EngineInformation engineInformation, Connection connection)  {
         int result = 0;
 
         String sqlEngineInformation = "INSERT INTO csv_cars_db.engine_information (drive_line,engine_type,hybrid," +
-                "transmission,number_of_forward_gears,engine_statistics_engine_statistics_id)" +
+                "transmission,number_of_forward_gears, engine_statistics_engine_statistics_id)" +
                 " VALUES( ?,?,?,?,?,? )";
 
         try {
+
             PreparedStatement statement = connection.prepareStatement(sqlEngineInformation,
                     PreparedStatement.RETURN_GENERATED_KEYS);
-
-            int idEngineStatic = insertEngineStatic(engineInformation.getEngineStatistics(), connection);
 
             statement.setString(1, engineInformation.getDriveLine());
             statement.setString(2, engineInformation.getEngineType());
             statement.setString(3, engineInformation.getHybrid());
             statement.setString(4, engineInformation.getTransmission());
             statement.setInt(5, engineInformation.getNumberOfForwardGears());
-            statement.setInt(6, idEngineStatic);
+            statement.setInt(6,insertEngineStatic(engineInformation.getEngineStatistics(),connection));
+
+            statement.executeUpdate();
 
             ResultSet resultSet = statement.getGeneratedKeys();
 
@@ -184,7 +182,7 @@ public class CarStatements {
         return result;
     }
 
-    private static int insertDimension(Dimensions dimensions, Connection connection) {
+    public static int insertDimension(Dimensions dimensions, Connection connection) {
         int result = 0;
 
         String sqlDimensions = "INSERT INTO csv_cars_db.dimensions (height,length,width) VALUES( ?,?,? )";

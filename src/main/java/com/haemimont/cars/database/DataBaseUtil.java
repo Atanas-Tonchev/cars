@@ -1,7 +1,5 @@
 package com.haemimont.cars.database;
-
 import com.haemimont.cars.model.Car;
-
 import java.sql.Connection;
 import java.util.Map;
 
@@ -12,6 +10,7 @@ public class DataBaseUtil {
 
         for (Map.Entry<Object, Car> carEntry : carMap.entrySet()) {
             CarStatements.insertCar(carEntry.getValue(), connection);
+
         }
 
         return isEmpty;

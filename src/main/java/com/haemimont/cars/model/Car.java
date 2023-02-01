@@ -5,18 +5,16 @@ public class Car {
     EngineInformation engineInformation;
     FuelInformation fuelInformation;
     Identification identification;
-    EngineStatistics engineStatistics;
 
     public Car(Dimensions dimensions, EngineInformation engineInformation,
-               FuelInformation fuelInformation, Identification identification,
-               EngineStatistics engineStatistics) {
+               FuelInformation fuelInformation, Identification identification) {
         this.dimensions = dimensions;
         this.engineInformation = engineInformation;
         this.fuelInformation = fuelInformation;
         this.identification = identification;
-        this.engineStatistics = engineStatistics;
     }
-    public Car(){
+
+    public Car() {
 
     }
 
@@ -52,11 +50,4 @@ public class Car {
         this.identification = identification;
     }
 
-    public EngineStatistics getEngineStatistics() {
-        return engineStatistics;
-    }
-
-    public void setEngineStatistics(EngineStatistics engineStatistics) {
-        this.engineStatistics = engineStatistics;
-    }
 }
