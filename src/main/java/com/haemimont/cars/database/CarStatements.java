@@ -1,11 +1,9 @@
 package com.haemimont.cars.database;
-
 import com.haemimont.cars.model.*;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
+
 
 public class CarStatements {
 
@@ -17,9 +15,6 @@ public class CarStatements {
                 "identification_identification_id," +
                 "engine_information_engine_information_id) " +
                 "VALUES(?,?,?,?)";
-
-//        PreparedStatement preparedStatement for car table ....
-
 
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sqlCar,PreparedStatement.RETURN_GENERATED_KEYS);
@@ -48,9 +43,6 @@ public class CarStatements {
         } catch (Exception e) {
             throw new RuntimeException();
         }
-
-
-
 
         return result;
     }
