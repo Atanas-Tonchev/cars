@@ -14,11 +14,13 @@ public class MyDataBase implements DataBase {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        if(connection != null){
+
+        if (connection != null) {
             System.out.println("Successfully connected.");
-        }else{
+        } else {
             System.out.println("Failed to connect.");
         }
+
         return connection;
     }
 
