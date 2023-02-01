@@ -8,6 +8,7 @@ import com.haemimont.cars.storage.Storage;
 import com.haemimont.cars.util.Util;
 import com.opencsv.CSVReader;
 
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.sql.Connection;
 import java.util.Objects;
@@ -16,15 +17,16 @@ public class Main {
 
     public static void main(String[] args) {
         DataBase dataBase = new MyDataBase();
-        String url = "";
+        String url = "jdbc:mysql://root:nasko@localhost:3306/csv_cars_db";
         Connection connection = dataBase.connect(url);
 
         boolean isDatabaseEmpty = true;
 
-        Storage<Object, Car> carStorage = Util.loadCarStorage("file.csv");
+
+        Storage<Object, Car> carStorage = Util.loadCarStorage("C:\\Users\\User\\IdeaProjects\\git\\cars\\data\\cars.csv");
 
         if (isDatabaseEmpty) {
-            DataBaseUtil.initDB(connection, carStorage);
+            //DataBaseUtil.initDB(connection, carStorage);
         }
 
         dataBase.disconnect(connection);

@@ -1,7 +1,5 @@
 package com.haemimont.cars.database;
-
 import com.haemimont.cars.model.Car;
-
 import java.sql.Connection;
 import java.util.Map;
 
