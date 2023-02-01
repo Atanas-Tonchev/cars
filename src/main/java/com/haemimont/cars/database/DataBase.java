@@ -1,7 +1,7 @@
 package com.haemimont.cars.database;
 
 import java.sql.Connection;
-import java.sql.SQLException;
+
 
 public interface DataBase {
 

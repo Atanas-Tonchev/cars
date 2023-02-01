@@ -12,19 +12,45 @@ public class CarStatements {
     public static int insertCar(Car car, Connection connection) {
         int result = 0;
 
+        String sqlCar = "INSERT INTO csv_cars_db.car (dimensions_dimensions_id," +
+                "fuel_information_fuel_information_id," +
+                "identification_identification_id," +
+                "engine_information_engine_information_id) " +
+                "VALUES(?,?,?,?)";
+
 //        PreparedStatement preparedStatement for car table ....
-//
+
+
         try {
+            PreparedStatement preparedStatement = connection.prepareStatement(sqlCar,PreparedStatement.RETURN_GENERATED_KEYS);
+
             int idDimension = insertDimension(car.getDimensions(), connection);
             int idEngineInformation = insertEngineInformation(car.getEngineInformation(), connection);
             int idFuelInformation = insertFuelInformation(car.getFuelInformation(), connection);
             int idIdentification = insertIdentification(car.getIdentification(), connection);
 
+            preparedStatement.setInt(1,idDimension);
+            preparedStatement.setInt(2,idFuelInformation);
+            preparedStatement.setInt(3,idIdentification);
+            preparedStatement.setInt(4,idEngineInformation);
+
+            preparedStatement.executeUpdate();
+
+            ResultSet resultSet = preparedStatement.getGeneratedKeys();
+
+            if (resultSet.next()) {
+                result = resultSet.getInt(1);
+                System.out.println("Tale 'Car' is created with ID: " + result);
+            }
+
+            preparedStatement.close();
+
         } catch (Exception e) {
             throw new RuntimeException();
         }
 
-        // preparedStatement.execute insert into car....
+
+
 
         return result;
     }
@@ -48,7 +74,9 @@ public class CarStatements {
                 System.out.println("Table 'Engine Static' is created with ID: " + result);
             } else {
                 System.out.println("No data inserted.");
-            } statement.close();
+            }
+
+            statement.close();
 
         } catch (Exception e) {
             throw new RuntimeException();
@@ -83,7 +111,9 @@ public class CarStatements {
                 System.out.println("Table 'Identification' is created with ID: " + result);
             } else {
                 System.out.println("No data inserted.");
-            }statement.close();
+            }
+
+            statement.close();
 
         }catch (Exception e) {
             throw new RuntimeException();
@@ -112,7 +142,9 @@ public class CarStatements {
                 System.out.println("Table 'Fuel Information' is created with ID: " + result);
             } else {
                 System.out.println("No data inserted.");
-            }statement.close();
+            }
+
+            statement.close();
 
         } catch (Exception e) {
             throw new RuntimeException();
@@ -149,7 +181,9 @@ public class CarStatements {
 
             } else {
                 System.out.println("No data inserted.");
-            } statement.close();
+            }
+
+            statement.close();
 
         } catch (Exception e) {
             throw new RuntimeException();
@@ -179,7 +213,9 @@ public class CarStatements {
 
             } else {
                 System.out.println("No data inserted.");
-            } statement.close();
+            }
+
+            statement.close();
 
         } catch (Exception e) {
             throw new RuntimeException();
