@@ -6,3 +6,4 @@ import java.util.HashMap;
 
 public class Storage<K,V> extends HashMap<Object, Car> {
 }
+

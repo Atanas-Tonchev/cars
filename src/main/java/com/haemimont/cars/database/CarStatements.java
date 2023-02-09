@@ -1,8 +1,11 @@
 package com.haemimont.cars.database;
 import com.haemimont.cars.model.*;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.HashMap;
 
 
 public class CarStatements {
@@ -213,4 +216,38 @@ public class CarStatements {
 
         return result;
     }
+
+    public static int selectDB(Connection connection) {
+        int result = 0;
+
+
+        String sqlAudi = "SELECT height,length,width,drive_line,engine_type,hybrid,transmission," +
+                "number_of_forward_gears,horsepower,torque,fuel_type, city_mpg,highway_mpg,classification," +
+                "identification.id,make,model_year,identification.year " +
+                "FROM dimensions, engine_information, engine_statistics, fuel_information, identification, car " +
+                "WHERE identification.make = 'Audi' " +
+                "AND identification_id = car.identification_identification_id " +
+                "AND dimensions_id = car.dimensions_dimensions_id " +
+                "AND engine_information_id = car.engine_information_engine_information_id " +
+                "AND engine_statistics_id = engine_information.engine_statistics_engine_statistics_id " +
+                "AND fuel_information_id = car.fuel_information_fuel_information_id " ;
+
+        try {
+            PreparedStatement statement = connection.prepareStatement(sqlAudi);
+            ResultSet resultSet = statement.executeQuery();
+
+            while (resultSet.next()) {
+                System.out.println("Dimension Height: " +resultSet.getObject("height")+ "\n"
+                   +" Dimension Length: " +resultSet.getObject("length")+ "\n" +
+                       " Dimension Width: " +resultSet.getObject("width"));
+
+            }
+            statement.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return result;
+    }
+
 }
