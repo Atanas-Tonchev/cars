@@ -247,11 +247,13 @@ public class CarStatements {
                 "ON " +
                 "identification.identification_id = car.identification_identification_id " +
                 "WHERE " +
-                "identification.make = 'Audi'; " ;
+                "identification.make = ? " ;
+
+
 
         try {
             PreparedStatement statement = connection.prepareStatement(sqlAudi);
-
+            statement.setString(1, make);
             ResultSet resultSet = statement.executeQuery();
 
             while (resultSet.next()) {
