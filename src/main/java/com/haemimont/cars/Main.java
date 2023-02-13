@@ -23,7 +23,7 @@ public class Main {
 
         if (isDatabaseEmpty) {
 
-           // DataBaseUtil.selectDB(connection);
+            DataBaseUtil.selectDB(connection);
            // DataBaseUtil.initDB(connection, carStorage);
         }
 

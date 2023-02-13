@@ -1,11 +1,10 @@
 package com.haemimont.cars.database;
 import com.haemimont.cars.model.*;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.HashMap;
+
 
 
 public class CarStatements {
@@ -221,25 +220,60 @@ public class CarStatements {
         int result = 0;
 
 
-        String sqlAudi = "SELECT height,length,width,drive_line,engine_type,hybrid,transmission," +
-                "number_of_forward_gears,horsepower,torque,fuel_type, city_mpg,highway_mpg,classification," +
-                "identification.id,make,model_year,identification.year " +
-                "FROM dimensions, engine_information, engine_statistics, fuel_information, identification, car " +
-                "WHERE identification.make = 'Audi' " +
-                "AND identification_id = car.identification_identification_id " +
-                "AND dimensions_id = car.dimensions_dimensions_id " +
-                "AND engine_information_id = car.engine_information_engine_information_id " +
-                "AND engine_statistics_id = engine_information.engine_statistics_engine_statistics_id " +
-                "AND fuel_information_id = car.fuel_information_fuel_information_id " ;
+        String sqlAudi = "SELECT " +
+                "height,length,width,drive_line,engine_type,hybrid,transmission," +
+                "number_of_forward_gears,horsepower,torque,fuel_type," +
+                "city_mpg,highway_mpg,classification,identification.id,make,model_year,identification.year " +
+                "FROM " +
+                "csv_cars_db.car " +
+                "INNER JOIN " +
+                "csv_cars_db.dimensions " +
+                "ON " +
+                "dimensions.dimensions_id = car.dimensions_dimensions_id " +
+                "INNER JOIN " +
+                "csv_cars_db.engine_information " +
+                "ON " +
+                "engine_information.engine_information_id = car.engine_information_engine_information_id " +
+                "INNER JOIN " +
+                "csv_cars_db.engine_statistics " +
+                "ON " +
+                "engine_statistics.engine_statistics_id = engine_information.engine_statistics_engine_statistics_id " +
+                "INNER JOIN " +
+                "csv_cars_db.fuel_information " +
+                "ON " +
+                "fuel_information.fuel_information_id = car.fuel_information_fuel_information_id " +
+                "INNER JOIN " +
+                "csv_cars_db.identification " +
+                "ON " +
+                "identification.identification_id = car.identification_identification_id " +
+                "WHERE " +
+                "identification.make = 'Audi'; " ;
 
         try {
             PreparedStatement statement = connection.prepareStatement(sqlAudi);
             ResultSet resultSet = statement.executeQuery();
 
             while (resultSet.next()) {
-                System.out.println("Dimension Height: " +resultSet.getObject("height")+ "\n"
-                   +" Dimension Length: " +resultSet.getObject("length")+ "\n" +
-                       " Dimension Width: " +resultSet.getObject("width"));
+                System.out.println("All cars Audi: "+ "\n" +
+                        "Dimension Height: " +resultSet.getObject("height")+
+                        ", Dimension Length: " +resultSet.getObject("length")+
+                        ", Dimension Width: " +resultSet.getObject("width")+
+                        ", Engine Information Drive Line: " +resultSet.getObject("drive_line")+
+                        ", Engine Information Engine Type: " +resultSet.getObject("engine_type")+
+                        ", Engine Information Hybrid: " +resultSet.getObject("hybrid")+
+                        ", Engine Information Transmission: " +resultSet.getObject("transmission")+
+                        ", Engine Information Number of Forward Gear: " +resultSet.getObject("number_of_forward_gears")+
+                        ", Engine Statistics Horsepower: " +resultSet.getObject("horsepower")+
+                        ", Engine Statistics Torque: " +resultSet.getObject("torque")+
+                        ", Fuel Information Fuel Type: " +resultSet.getObject("fuel_type")+
+                        ", Fuel Information City Mpg: " +resultSet.getObject("city_mpg")+
+                        ", Fuel Information Highway Mpg: " +resultSet.getObject("highway_mpg")+
+                        ", Identification Classification: " +resultSet.getObject("classification")+
+                        ", Identification ID: " +resultSet.getObject("identification.id")+
+                        ", Identification Make: " +resultSet.getObject("make")+
+                        ", Identification Model Year: " +resultSet.getObject("model_year")+
+                        ", Identification Year: " +resultSet.getObject("year"));
+
 
             }
             statement.close();
