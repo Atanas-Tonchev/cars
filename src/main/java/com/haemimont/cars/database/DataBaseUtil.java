@@ -1,7 +1,7 @@
 package com.haemimont.cars.database;
 import com.haemimont.cars.model.Car;
 import java.sql.Connection;
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 public class DataBaseUtil {
@@ -20,8 +20,9 @@ public class DataBaseUtil {
 
     public static boolean selectDB (Connection connection) {
         boolean noData = false;
+        String make = "Audi";
 
-            CarStatements.selectDB(connection);
+            CarStatements.getCarsByMake(connection,make);
 
         return noData;
     }

@@ -22,8 +22,9 @@ public class Car {
         return dimensions;
     }
 
-    public void setDimensions(Dimensions dimensions) {
+    public Car setDimensions(Dimensions dimensions) {
         this.dimensions = dimensions;
+        return null;
     }
 
     public EngineInformation getEngineInformation() {
@@ -50,4 +51,13 @@ public class Car {
         this.identification = identification;
     }
 
+    @Override
+    public String toString() {
+        return "Car{" +
+                "dimensions=" + dimensions +
+                ", engineInformation=" + engineInformation +
+                ", fuelInformation=" + fuelInformation +
+                ", identification=" + identification +
+                '}';
+    }
 }

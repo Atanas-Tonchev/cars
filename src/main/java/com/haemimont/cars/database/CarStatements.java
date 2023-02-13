@@ -4,7 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class CarStatements {
@@ -216,9 +217,8 @@ public class CarStatements {
         return result;
     }
 
-    public static int selectDB(Connection connection) {
-        int result = 0;
-
+    public static List<Car> getCarsByMake(Connection connection, String make) {
+        List<Car> myList = new ArrayList<>();
 
         String sqlAudi = "SELECT " +
                 "height,length,width,drive_line,engine_type,hybrid,transmission," +
@@ -251,10 +251,40 @@ public class CarStatements {
 
         try {
             PreparedStatement statement = connection.prepareStatement(sqlAudi);
+
             ResultSet resultSet = statement.executeQuery();
 
             while (resultSet.next()) {
-                System.out.println("All cars Audi: "+ "\n" +
+
+                myList.add(new Car(new Dimensions((int) resultSet.getObject("height"),
+                        (int) resultSet.getObject("length"),
+                        (int) resultSet.getObject("width")),
+                        new EngineInformation((String) resultSet.getObject("drive_line"),
+                                (String) resultSet.getObject("engine_type"),
+                                (String) resultSet.getObject("hybrid"),
+                                (String) resultSet.getObject("transmission"),
+                                (Integer) resultSet.getObject("number_of_forward_gears"),
+                                new EngineStatistics((Integer) resultSet.getObject("horsepower"),
+                                        (Integer) resultSet.getObject("torque"))),
+                        new FuelInformation((String) resultSet.getObject("fuel_type"),
+                                (Integer) resultSet.getObject("city_mpg"),
+                                (Integer) resultSet.getObject("highway_mpg")),
+                        new Identification((String) resultSet.getObject("classification"),
+                        (String) resultSet.getObject("identification.id"),
+                                (String) resultSet.getObject("make"),
+                        (String) resultSet.getObject("model_year"),
+                                (Integer) resultSet.getObject("year"))));
+
+               // System.out.println(myList);
+                 for(int i = 0;i<myList.size();i++) {
+                     System.out.println(myList.get(i));
+
+                }
+
+                break;
+
+
+              /*  System.out.println("All cars Audi: "+ "\n" +
                         "Dimension Height: " +resultSet.getObject("height")+
                         ", Dimension Length: " +resultSet.getObject("length")+
                         ", Dimension Width: " +resultSet.getObject("width")+
@@ -272,8 +302,7 @@ public class CarStatements {
                         ", Identification ID: " +resultSet.getObject("identification.id")+
                         ", Identification Make: " +resultSet.getObject("make")+
                         ", Identification Model Year: " +resultSet.getObject("model_year")+
-                        ", Identification Year: " +resultSet.getObject("year"));
-
+                        ", Identification Year: " +resultSet.getObject("year")); */
 
             }
             statement.close();
@@ -281,7 +310,7 @@ public class CarStatements {
             throw new RuntimeException(e);
         }
 
-        return result;
+        return myList;
     }
 
 }

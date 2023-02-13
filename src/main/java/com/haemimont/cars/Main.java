@@ -17,16 +17,15 @@ public class Main {
         Connection connection = dataBase.connect(url);
 
 
-        boolean isDatabaseEmpty = true;
+        boolean isDatabaseEmpty = false;
 
         Storage<Object, Car> carStorage = Util.loadCarStorage("C:\\Users\\User\\IdeaProjects\\git\\cars\\data\\cars.csv");
 
         if (isDatabaseEmpty) {
-
-            DataBaseUtil.selectDB(connection);
-           // DataBaseUtil.initDB(connection, carStorage);
+            DataBaseUtil.initDB(connection, carStorage);
         }
-
+        DataBaseUtil.selectDB(connection);
+        //DataBaseUtil.selectDB(connection);
         dataBase.disconnect(connection);
     }
 
