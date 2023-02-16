@@ -218,7 +218,9 @@ public class CarStatements {
     }
 
     public static List<Car> getCarsByMake(Connection connection, String make) {
+
         List<Car> myList = new ArrayList<>();
+
 
         String sqlAudi = "SELECT " +
                 "height,length,width,drive_line,engine_type,hybrid,transmission," +
@@ -246,8 +248,7 @@ public class CarStatements {
                 "csv_cars_db.identification " +
                 "ON " +
                 "identification.identification_id = car.identification_identification_id " +
-                "WHERE " +
-                "identification.make = ? " ;
+                "WHERE identification.make = ? " ;
 
 
 
@@ -257,6 +258,8 @@ public class CarStatements {
             ResultSet resultSet = statement.executeQuery();
 
             while (resultSet.next()) {
+
+
 
                 myList.add(new Car(new Dimensions((int) resultSet.getObject("height"),
                         (int) resultSet.getObject("length"),
@@ -277,34 +280,13 @@ public class CarStatements {
                         (String) resultSet.getObject("model_year"),
                                 (Integer) resultSet.getObject("year"))));
 
-               // System.out.println(myList);
+
                  for(int i = 0;i<myList.size();i++) {
                      System.out.println(myList.get(i));
 
                 }
 
                 break;
-
-
-              /*  System.out.println("All cars Audi: "+ "\n" +
-                        "Dimension Height: " +resultSet.getObject("height")+
-                        ", Dimension Length: " +resultSet.getObject("length")+
-                        ", Dimension Width: " +resultSet.getObject("width")+
-                        ", Engine Information Drive Line: " +resultSet.getObject("drive_line")+
-                        ", Engine Information Engine Type: " +resultSet.getObject("engine_type")+
-                        ", Engine Information Hybrid: " +resultSet.getObject("hybrid")+
-                        ", Engine Information Transmission: " +resultSet.getObject("transmission")+
-                        ", Engine Information Number of Forward Gear: " +resultSet.getObject("number_of_forward_gears")+
-                        ", Engine Statistics Horsepower: " +resultSet.getObject("horsepower")+
-                        ", Engine Statistics Torque: " +resultSet.getObject("torque")+
-                        ", Fuel Information Fuel Type: " +resultSet.getObject("fuel_type")+
-                        ", Fuel Information City Mpg: " +resultSet.getObject("city_mpg")+
-                        ", Fuel Information Highway Mpg: " +resultSet.getObject("highway_mpg")+
-                        ", Identification Classification: " +resultSet.getObject("classification")+
-                        ", Identification ID: " +resultSet.getObject("identification.id")+
-                        ", Identification Make: " +resultSet.getObject("make")+
-                        ", Identification Model Year: " +resultSet.getObject("model_year")+
-                        ", Identification Year: " +resultSet.getObject("year")); */
 
             }
             statement.close();
@@ -313,6 +295,77 @@ public class CarStatements {
         }
 
         return myList;
+    }
+
+    public static List<Car> getCarsByYear (Connection connection,String year) {
+        List<Car> myCars = new ArrayList<>();
+
+        String sqlCarsByYear = "SELECT " +
+                "height,length,width,drive_line,engine_type,hybrid,transmission," +
+                "number_of_forward_gears,horsepower,torque,fuel_type," +
+                "city_mpg,highway_mpg,classification,identification.id,make,model_year,identification.year " +
+                "FROM " +
+                "csv_cars_db.car " +
+                "INNER JOIN " +
+                "csv_cars_db.dimensions " +
+                "ON " +
+                "dimensions.dimensions_id = car.dimensions_dimensions_id " +
+                "INNER JOIN " +
+                "csv_cars_db.engine_information " +
+                "ON " +
+                "engine_information.engine_information_id = car.engine_information_engine_information_id " +
+                "INNER JOIN " +
+                "csv_cars_db.engine_statistics " +
+                "ON " +
+                "engine_statistics.engine_statistics_id = engine_information.engine_statistics_engine_statistics_id " +
+                "INNER JOIN " +
+                "csv_cars_db.fuel_information " +
+                "ON " +
+                "fuel_information.fuel_information_id = car.fuel_information_fuel_information_id " +
+                "INNER JOIN " +
+                "csv_cars_db.identification " +
+                "ON " +
+                "identification.identification_id = car.identification_identification_id " +
+                "WHERE identification.year = ? " ;
+                //identification.year = 2009 to 2012
+
+        try {
+            PreparedStatement statement = connection.prepareStatement(sqlCarsByYear);
+            statement.setString(1, year);
+            ResultSet resultSet = statement.executeQuery();
+
+            while (resultSet.next()) {
+                myCars.add(new Car(new Dimensions((int) resultSet.getObject("height"),
+                        (int) resultSet.getObject("length"),
+                        (int) resultSet.getObject("width")),
+                        new EngineInformation((String) resultSet.getObject("drive_line"),
+                                (String) resultSet.getObject("engine_type"),
+                                (String) resultSet.getObject("hybrid"),
+                                (String) resultSet.getObject("transmission"),
+                                (Integer) resultSet.getObject("number_of_forward_gears"),
+                                new EngineStatistics((Integer) resultSet.getObject("horsepower"),
+                                        (Integer) resultSet.getObject("torque"))),
+                        new FuelInformation((String) resultSet.getObject("fuel_type"),
+                                (Integer) resultSet.getObject("city_mpg"),
+                                (Integer) resultSet.getObject("highway_mpg")),
+                        new Identification((String) resultSet.getObject("classification"),
+                                (String) resultSet.getObject("identification.id"),
+                                (String) resultSet.getObject("make"),
+                                (String) resultSet.getObject("model_year"),
+                                (Integer) resultSet.getObject("year"))));
+
+
+                for(int i = 0;i<myCars.size();i++) {
+                    System.out.println(myCars.get(i));
+
+                }
+                break;
+            }
+            statement.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return myCars;
     }
 
 }
