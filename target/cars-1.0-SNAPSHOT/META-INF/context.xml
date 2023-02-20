@@ -1,0 +1,6 @@
+<?xml version='1.0' encoding='utf-8'?>
+
+    <ResourceLink name="jdbc/csv_cars_db"
+              global="jdbc/csv_cars_db"
+              auth="Container"
+              type="javax.sql.DataSource" />

@@ -24,7 +24,7 @@ public class Main {
         if (isDatabaseEmpty) {
             DataBaseUtil.initDB(connection, carStorage);
         }
-        DataBaseUtil.selectDB(connection);
+      //  DataBaseUtil.selectMakeFromDB(connection);
         //DataBaseUtil.selectDB(connection);
         dataBase.disconnect(connection);
     }

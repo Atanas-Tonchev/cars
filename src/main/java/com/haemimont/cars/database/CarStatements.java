@@ -1,9 +1,7 @@
 package com.haemimont.cars.database;
 import com.haemimont.cars.model.*;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -286,7 +284,7 @@ public class CarStatements {
 
                 }
 
-                break;
+
 
             }
             statement.close();
@@ -365,7 +363,138 @@ public class CarStatements {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+
         return myCars;
     }
 
+
+
+    public static List<Car> getCars(Connection connection) {
+        List<Car> myCars = new ArrayList<>();
+
+        String sqlCarsByYear = "SELECT " +
+                "height,length,width,drive_line,engine_type,hybrid,transmission," +
+                "number_of_forward_gears,horsepower,torque,fuel_type," +
+                "city_mpg,highway_mpg,classification,identification.id,make,model_year,identification.year " +
+                "FROM " +
+                "csv_cars_db.car " +
+                "INNER JOIN " +
+                "csv_cars_db.dimensions " +
+                "ON " +
+                "dimensions.dimensions_id = car.dimensions_dimensions_id " +
+                "INNER JOIN " +
+                "csv_cars_db.engine_information " +
+                "ON " +
+                "engine_information.engine_information_id = car.engine_information_engine_information_id " +
+                "INNER JOIN " +
+                "csv_cars_db.engine_statistics " +
+                "ON " +
+                "engine_statistics.engine_statistics_id = engine_information.engine_statistics_engine_statistics_id " +
+                "INNER JOIN " +
+                "csv_cars_db.fuel_information " +
+                "ON " +
+                "fuel_information.fuel_information_id = car.fuel_information_fuel_information_id " +
+                "INNER JOIN " +
+                "csv_cars_db.identification " +
+                "ON " +
+                "identification.identification_id = car.identification_identification_id ";
+        //identification.year = 2009 to 2012
+
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(sqlCarsByYear);
+
+            while (resultSet.next()) {
+                myCars.add(new Car(new Dimensions((int) resultSet.getObject("height"),
+                        (int) resultSet.getObject("length"),
+                        (int) resultSet.getObject("width")),
+                        new EngineInformation((String) resultSet.getObject("drive_line"),
+                                (String) resultSet.getObject("engine_type"),
+                                (String) resultSet.getObject("hybrid"),
+                                (String) resultSet.getObject("transmission"),
+                                (Integer) resultSet.getObject("number_of_forward_gears"),
+                                new EngineStatistics((Integer) resultSet.getObject("horsepower"),
+                                        (Integer) resultSet.getObject("torque"))),
+                        new FuelInformation((String) resultSet.getObject("fuel_type"),
+                                (Integer) resultSet.getObject("city_mpg"),
+                                (Integer) resultSet.getObject("highway_mpg")),
+                        new Identification((String) resultSet.getObject("classification"),
+                                (String) resultSet.getObject("identification.id"),
+                                (String) resultSet.getObject("make"),
+                                (String) resultSet.getObject("model_year"),
+                                (Integer) resultSet.getObject("year"))));
+
+            }
+            statement.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return myCars;
+    }
+
+    public static Car getCarByID(Connection connection,int year) {
+
+        String sqlCarsByYear = "SELECT " +
+                "height,length,width,drive_line,engine_type,hybrid,transmission," +
+                "number_of_forward_gears,horsepower,torque,fuel_type," +
+                "city_mpg,highway_mpg,classification,identification.id,make,model_year,identification.year " +
+                "FROM " +
+                "csv_cars_db.car " +
+                "INNER JOIN " +
+                "csv_cars_db.dimensions " +
+                "ON " +
+                "dimensions.dimensions_id = car.dimensions_dimensions_id " +
+                "INNER JOIN " +
+                "csv_cars_db.engine_information " +
+                "ON " +
+                "engine_information.engine_information_id = car.engine_information_engine_information_id " +
+                "INNER JOIN " +
+                "csv_cars_db.engine_statistics " +
+                "ON " +
+                "engine_statistics.engine_statistics_id = engine_information.engine_statistics_engine_statistics_id " +
+                "INNER JOIN " +
+                "csv_cars_db.fuel_information " +
+                "ON " +
+                "fuel_information.fuel_information_id = car.fuel_information_fuel_information_id " +
+                "INNER JOIN " +
+                "csv_cars_db.identification " +
+                "ON " +
+                "identification.identification_id = car.identification_identification_id " +
+                "WHERE car_id = ? " ;
+        //identification.year = 2009 to 2012
+
+        try {
+            PreparedStatement statement = connection.prepareStatement(sqlCarsByYear);
+            statement.setInt(1, year);
+            ResultSet resultSet = statement.executeQuery();
+
+            if (resultSet.next()) {
+                return new Car(new Dimensions((int) resultSet.getObject("height"),
+                        (int) resultSet.getObject("length"),
+                        (int) resultSet.getObject("width")),
+                        new EngineInformation((String) resultSet.getObject("drive_line"),
+                                (String) resultSet.getObject("engine_type"),
+                                (String) resultSet.getObject("hybrid"),
+                                (String) resultSet.getObject("transmission"),
+                                (Integer) resultSet.getObject("number_of_forward_gears"),
+                                new EngineStatistics((Integer) resultSet.getObject("horsepower"),
+                                        (Integer) resultSet.getObject("torque"))),
+                        new FuelInformation((String) resultSet.getObject("fuel_type"),
+                                (Integer) resultSet.getObject("city_mpg"),
+                                (Integer) resultSet.getObject("highway_mpg")),
+                        new Identification((String) resultSet.getObject("classification"),
+                                (String) resultSet.getObject("identification.id"),
+                                (String) resultSet.getObject("make"),
+                                (String) resultSet.getObject("model_year"),
+                                (Integer) resultSet.getObject("year")));
+            }
+
+            statement.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return null;
+    }
 }

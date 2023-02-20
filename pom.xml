@@ -26,6 +26,42 @@
             <artifactId>opencsv</artifactId>
             <version>5.7.1</version>
         </dependency>
+        <dependency>
+            <groupId>jakarta.servlet</groupId>
+            <artifactId>jakarta.servlet-api</artifactId>
+            <version>5.0.0</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>2.10.1</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/jakarta.annotation/jakarta.annotation-api -->
+        <!-- https://mvnrepository.com/artifact/jakarta.enterprise/jakarta.enterprise.cdi-api -->
 
     </dependencies>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin
+                </artifactId>
+                <version>3.3.2</version>
+                <configuration>
+                    <warName>cars</warName>
+                </configuration>
+                <!--                <configuration>-->
+                <!--                    <webResources>-->
+                <!--                        <resource>-->
+                <!--                            &lt;!&ndash; this is relative to the pom.xml directory &ndash;&gt;-->
+                <!--                            <directory>resource2</directory>-->
+                <!--                        </resource>-->
+                <!--                    </webResources>-->
+                <!--                </configuration>-->
+            </plugin>
+        </plugins>
+    </build>
+    <packaging>war</packaging>
 </project>
