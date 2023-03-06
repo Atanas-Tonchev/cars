@@ -8,13 +8,14 @@ import java.sql.SQLException;
 
 public class ConnectMySqlToTomcat {
 
-    public Connection getConnection() throws NamingException, SQLException {
+    public static Connection getConnection() throws NamingException, SQLException {
 
         Context initContext = new InitialContext();
         Context envContext = (Context) initContext.lookup("java:/comp/env");
         DataSource ds = (DataSource) envContext.lookup("jdbc/csv_cars_db");
         return ds.getConnection();
     }
+
 
 }
 

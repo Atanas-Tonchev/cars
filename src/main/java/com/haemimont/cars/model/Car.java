@@ -5,9 +5,19 @@ public class Car {
     EngineInformation engineInformation;
     FuelInformation fuelInformation;
     Identification identification;
+    protected int id;
 
     public Car(Dimensions dimensions, EngineInformation engineInformation,
-               FuelInformation fuelInformation, Identification identification) {
+               FuelInformation fuelInformation, Identification identification, int id) {
+        this.dimensions = dimensions;
+        this.engineInformation = engineInformation;
+        this.fuelInformation = fuelInformation;
+        this.identification = identification;
+        this.id = id;
+    }
+
+    public Car(Dimensions dimensions, EngineInformation engineInformation, FuelInformation fuelInformation,
+               Identification identification) {
         this.dimensions = dimensions;
         this.engineInformation = engineInformation;
         this.fuelInformation = fuelInformation;
@@ -18,6 +28,13 @@ public class Car {
 
     }
 
+    public Car(int id) {
+        this.id = id;
+    }
+
+
+
+
     public Dimensions getDimensions() {
         return dimensions;
     }
@@ -25,6 +42,14 @@ public class Car {
     public Car setDimensions(Dimensions dimensions) {
         this.dimensions = dimensions;
         return null;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public EngineInformation getEngineInformation() {
@@ -58,6 +83,7 @@ public class Car {
                 ", engineInformation=" + engineInformation +
                 ", fuelInformation=" + fuelInformation +
                 ", identification=" + identification +
+                ", id=" + id +
                 '}';
     }
 }

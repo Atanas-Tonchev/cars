@@ -1,11 +1,11 @@
 package com.haemimont.cars.model;
 
 public class EngineInformation {
-    private final String DriveLine;
-    private final String EngineType;
-    private final String Hybrid;
-    private final String Transmission;
-    private final int NumberOfForwardGears;
+    private String DriveLine;
+    private String EngineType;
+    private String Hybrid;
+    private String Transmission;
+    private int NumberOfForwardGears;
     EngineStatistics engineStatistics;
 
     public EngineInformation(String driveLine, String engineType, String hybrid,
@@ -16,6 +16,11 @@ public class EngineInformation {
         Hybrid = hybrid;
         Transmission = transmission;
         NumberOfForwardGears = numberOfForwardGears;
+        this.engineStatistics = engineStatistics;
+    }
+    public EngineInformation(String engineType, String transmission, EngineStatistics engineStatistics) {
+        this.EngineType = engineType;
+        this.Transmission = transmission;
         this.engineStatistics = engineStatistics;
     }
 

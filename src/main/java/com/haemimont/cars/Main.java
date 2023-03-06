@@ -26,6 +26,7 @@ public class Main {
         }
       //  DataBaseUtil.selectMakeFromDB(connection);
         //DataBaseUtil.selectDB(connection);
+      //  LoginStatements.insertUserName(connection);
         dataBase.disconnect(connection);
     }
 

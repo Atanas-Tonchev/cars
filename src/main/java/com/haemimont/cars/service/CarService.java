@@ -34,8 +34,27 @@ public class CarService implements CRUDService{
         return CarStatements.getCarByID(connection, carID);
     }
 
+
+
+
     @Override
-    public List<Car> getCarByMake(String carMake) {
-        return CarStatements.getCarsByMake(connection,carMake);
+    public boolean insertNewCars(Car car) {
+        return CarStatements.insertNewCar(car,connection);
     }
+
+    @Override
+    public boolean deleteCar(Car car) {
+        return CarStatements.deleteCar(car,connection);
+    }
+
+    @Override
+    public boolean updateCar(Car car) {
+        return CarStatements.updateCar(car,connection);
+    }
+
+    @Override
+    public List<Car> getLastCarInserted() {
+        return CarStatements.getLastCarsInserted(connection);
+    }
+
 }

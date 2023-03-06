@@ -31,7 +31,7 @@ public class DataBaseUtil {
         return noData;
     }
 
-    public static boolean selectYearFromDB(Connection connection) {
+    /*public static boolean selectYearFromDB(Connection connection) {
         boolean noData = false;
         Scanner myYear = new Scanner(System.in);
         System.out.println("Enter year from 2009 to 2012: ");
@@ -47,6 +47,6 @@ public class DataBaseUtil {
         }
         CarStatements.getCarsByYear(connection, String.valueOf(year));
         return noData;
-    }
+    }*/
 }
 

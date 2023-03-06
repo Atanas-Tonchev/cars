@@ -6,8 +6,39 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>cars</servlet-name>
-        <url-pattern>/myCars</url-pattern>
+        <url-pattern>/CarServlet</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>cars</servlet-name>
+        <url-pattern>./CarServlet/list</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>cars</servlet-name>
+        <url-pattern>./CarServlet/new</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>cars</servlet-name>
+        <url-pattern>./CarServlet/insert</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>cars</servlet-name>
+        <url-pattern>./CarServlet/delete</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>cars</servlet-name>
+        <url-pattern>./CarServlet/edit</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>cars</servlet-name>
+        <url-pattern>./CarServlet/update</url-pattern>
+    </servlet-mapping>
+    <welcome-file-list>
+        <welcome-file>home.jsp</welcome-file>
+    </welcome-file-list>
+    <error-page>
+        <exception-type>java.lang.Exception</exception-type>
+        <location>/Error.jsp</location>
+    </error-page>
     <resource-ref>
         <description>DataBase</description>
         <res-ref-name>jdbc/csv_cars_db</res-ref-name>

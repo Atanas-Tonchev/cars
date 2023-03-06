@@ -2,11 +2,14 @@ package com.haemimont.cars.model;
 
 public class EngineStatistics {
     private final int Horsepower;
-    private final int Torque;
+    private int Torque;
 
     public EngineStatistics(int horsepower, int torque) {
         Horsepower = horsepower;
         Torque = torque;
+    }
+    public EngineStatistics(int horsepower){
+        Horsepower = horsepower;
     }
 
     public int getHorsepower() {

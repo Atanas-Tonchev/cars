@@ -2,13 +2,16 @@ package com.haemimont.cars.model;
 
 public class FuelInformation {
     private final String FuelType;
-    private final int CityMpg;
-    private final int HighwayMpg;
+    private int CityMpg;
+    private int HighwayMpg;
 
     public FuelInformation(String fuelType, int cityMpg, int highwayMpg) {
         FuelType = fuelType;
         CityMpg = cityMpg;
         HighwayMpg = highwayMpg;
+    }
+    public FuelInformation(String fuelType) {
+        FuelType = fuelType;
     }
 
     public String getFuelType() {
