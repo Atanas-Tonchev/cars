@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
+          integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
+          crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet" href="styleJsp.css" />
 <html>
 <head>
     <title>Cars Store Application</title>
@@ -8,18 +12,18 @@
     <center>
         <h1>Cars Management</h1>
         <h2>
-            <a href="./CarServlet/new">Add New Car</a>
+            <a href="./new" class="btn" ><i class="fa fa-car" aria-hidden="true">+</i></a>
             &nbsp;&nbsp;&nbsp;
-            <a href="./CarServlet/list">List All Cars</a>
+            <a href="./list"class="btn2 "><i class="fa fa-car" aria-hidden="true"><i class="fa-solid fa-list"></i></i></a>
 
         </h2>
     </center>
     <div align="center">
         <c:if test="${car != null}">
-            <form action="update" method="post">
+            <form action="./update" method="post">
         </c:if>
         <c:if test="${car == null}">
-            <form action="insert" method="post">
+            <form action="./insert" method="post">
         </c:if>
         <table border="1" cell-padding="5">
             <caption>
@@ -38,7 +42,7 @@
                  <tr>
                     <th>Dimensions Height: </th>
                        <td>
-                           <input type="text" name="height" size="45"
+                           <input type="text" name="height" size="5"
                            value="<c:out value='${car.dimensions.height}' />"
                            />
                        </td>
@@ -60,129 +64,130 @@
                         </td>
                  </tr>
                  <tr>
-                                     <th>Drive Line: </th>
-                                         <td>
-                                            <input type="text" name="driveLine" size="5"
-                                            value="<c:out value='${car.engineInformation.driveLine}' />"
-                                            >
-                                         </td>
-                                  </tr>
+                    <th>Drive Line: </th>
+                        <td>
+                            <input type="text" name="driveLine" size="45"
+                            value="<c:out value='${car.engineInformation.driveLine}' />"
+                            >
+                        </td>
+                 </tr>
                  <tr>
-                                     <th>Engine Type: </th>
-                                         <td>
-                                            <input type="text" name="engineType" size="5"
-                                            value="<c:out value='${car.engineInformation.engineType}' />"
-                                            >
-                                         </td>
-                                  </tr>
+                    <th>Engine Type: </th>
+                        <td>
+                            <input type="text" name="engineType" size="45"
+                            value="<c:out value='${car.engineInformation.engineType}' />"
+                            >
+                        </td>
+                 </tr>
                  <tr>
-                                     <th>Hybrid: </th>
-                                         <td>
-                                            <input type="text" name="hybrid" size="5"
-                                            value="<c:out value='${car.engineInformation.hybrid}' />"
-                                            >
-                                         </td>
-                                  </tr>
+                     <th>Hybrid: </th>
+                        <td>
+                            <input type="text" name="hybrid" size="5"
+                            value="<c:out value='${car.engineInformation.hybrid}' />"
+                            >
+                        </td>
+                 </tr>
                  <tr>
-                                     <th>Transmission: </th>
-                                         <td>
-                                            <input type="text" name="transmission" size="5"
-                                            value="<c:out value='${car.engineInformation.transmission}' />"
-                                            >
-                                         </td>
-                                  </tr>
+                     <th>Transmission: </th>
+                        <td>
+                            <input type="text" name="transmission" size="45"
+                            value="<c:out value='${car.engineInformation.transmission}' />"
+                            >
+                        </td>
+                 </tr>
                  <tr>
-                                     <th>Number of forward gears: </th>
-                                         <td>
-                                            <input type="text" name="numberOfForwardGears" size="5"
-                                            value="<c:out value='${car.engineInformation.numberOfForwardGears}' />"
-                                            >
-                                         </td>
-                                  </tr>
+                     <th>Number of forward gears: </th>
+                        <td>
+                            <input type="text" name="numberOfForwardGears" size="5"
+                            value="<c:out value='${car.engineInformation.numberOfForwardGears}' />"
+                            >
+                        </td>
+                 </tr>
                  <tr>
-                                     <th>Horsepower: </th>
-                                         <td>
-                                            <input type="text" name="horsepower" size="5"
-                                            value="<c:out value='${car.engineInformation.engineStatistics.horsepower}' />"
-                                            >
-                                         </td>
-                                  </tr>
+                     <th>Horsepower: </th>
+                        <td>
+                            <input type="text" name="horsepower" size="5"
+                            value="<c:out value='${car.engineInformation.engineStatistics.horsepower}' />"
+                            >
+                        </td>
+                 </tr>
                  <tr>
-                                     <th>Torque: </th>
-                                         <td>
-                                            <input type="text" name="torque" size="5"
-                                            value="<c:out value='${car.engineInformation.engineStatistics.torque}' />"
-                                            >
-                                         </td>
-                                  </tr>
+                     <th>Torque: </th>
+                         <td>
+                            <input type="text" name="torque" size="5"
+                            value="<c:out value='${car.engineInformation.engineStatistics.torque}' />"
+                            >
+                         </td>
+                 </tr>
                  <tr>
-                                     <th>Fuel Type: </th>
-                                         <td>
-                                            <input type="text" name="fuelType" size="5"
-                                            value="<c:out value='${car.fuelInformation.fuelType}' />"
-                                            >
-                                         </td>
-                                  </tr>
+                     <th>Fuel Type: </th>
+                         <td>
+                            <input type="text" name="fuelType" size="45"
+                            value="<c:out value='${car.fuelInformation.fuelType}' />"
+                            >
+                         </td>
+                 </tr>
                  <tr>
-                                     <th>City mpg: </th>
-                                         <td>
-                                            <input type="text" name="cityMpg" size="5"
-                                            value="<c:out value='${car.fuelInformation.cityMpg}' />"
-                                            >
-                                         </td>
-                                  </tr>
+                     <th>City mpg: </th>
+                         <td>
+                            <input type="text" name="cityMpg" size="5"
+                            value="<c:out value='${car.fuelInformation.cityMpg}' />"
+                            >
+                         </td>
+                 </tr>
                  <tr>
-                                     <th>Highway mpg: </th>
-                                         <td>
-                                            <input type="text" name="highwayMpg" size="5"
-                                            value="<c:out value='${car.fuelInformation.highwayMpg}' />"
-                                            >
-                                         </td>
-                                  </tr>
+                     <th>Highway mpg: </th>
+                         <td>
+                             <input type="text" name="highwayMpg" size="5"
+                             value="<c:out value='${car.fuelInformation.highwayMpg}' />"
+                             >
+                         </td>
+                 </tr>
                  <tr>
-                                     <th>Classification: </th>
-                                         <td>
-                                            <input type="text" name="classification" size="5"
-                                            value="<c:out value='${car.identification.classification}' />"
-                                            >
-                                         </td>
-                                  </tr>
+                     <th>Classification: </th>
+                         <td>
+                             <input type="text" name="classification" size="45"
+                             value="<c:out value='${car.identification.classification}' />"
+                             >
+                         </td>
+                 </tr>
                  <tr>
-                                     <th>Identification: </th>
-                                         <td>
-                                            <input type="text" name="ID" size="5"
-                                            value="<c:out value='${car.identification.ID}' />"
-                                            >
-                                         </td>
-                                  </tr>
+                     <th>Identification: </th>
+                         <td>
+                             <input type="text" name="ID" size="45"
+                             value="<c:out value='${car.identification.ID}' />"
+                             >
+                         </td>
+                 </tr>
                  <tr>
-                                     <th>Make: </th>
-                                         <td>
-                                            <input type="text" name="make" size="5"
-                                            value="<c:out value='${car.identification.make}' />"
-                                            >
-                                         </td>
-                                  </tr>
+                     <th>Make: </th>
+                         <td>
+                             <input type="text" name="make" size="45"
+                             value="<c:out value='${car.identification.make}' />"
+                             >
+                         </td>
+                 </tr>
                  <tr>
-                                     <th>Model & Year: </th>
-                                         <td>
-                                            <input type="text" name="modelYear" size="5"
-                                            value="<c:out value='${car.identification.modelYear}' />"
-                                            >
-                                         </td>
-                                  </tr>
+                     <th>Model & Year: </th>
+                         <td>
+                             <input type="text" name="modelYear" size="45"
+                             value="<c:out value='${car.identification.modelYear}' />"
+                             >
+                         </td>
+                 </tr>
                  <tr>
-                                     <th>Year: </th>
-                                         <td>
-                                            <input type="text" name="year" size="5"
-                                            value="<c:out value='${car.identification.year}' />"
-                                            >
-                                         </td>
-                                  </tr>
+                     <th>Year: </th>
+                         <td>
+                             <input type="text" name="year" size="5"
+                             value="<c:out value='${car.identification.year}' />"
+                             >
+                         </td>
+                 </tr>
+                 <tr>
 
-                 <tr>
-                    <td col-span="2" align="center">
-                        <input type="submit" value="Save" />
+                    <td colspan="5" align="center">
+                        <input type="submit" value = "Save" />
+                        <input type="reset" value="Reset">
                     </td>
                 </tr>
         </table>

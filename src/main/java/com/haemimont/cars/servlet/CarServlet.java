@@ -1,6 +1,6 @@
 package com.haemimont.cars.servlet;
 import com.haemimont.cars.model.*;
-import com.haemimont.cars.service.CRUDService;
+import com.haemimont.cars.service.CRUDServiceCars;
 import com.haemimont.cars.service.CarService;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
@@ -10,18 +10,18 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.sql.*;
-import java.util.ArrayList;
 import java.util.List;
 
 
 public class CarServlet extends HttpServlet {
 
-    CRUDService crudService = new CarService();
+    CRUDServiceCars crudService = new CarService();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         String action = req.getServletPath();
+
         try {
             switch (action) {
                 case "/new":
@@ -46,69 +46,13 @@ public class CarServlet extends HttpServlet {
         } catch (SQLException ex) {
             throw new ServletException(ex);
         }
-        /*int id = Integer.parseInt(req.getParameter("id"));
-        String sqlDelete = "DELETE FROM csv_cars_db.login WHERE login_id = ?";
 
-        try {
-            Connection connection = ConnectMySqlToTomcat.getConnection();
-            PreparedStatement statement = connection.prepareStatement(sqlDelete);
-            if(id>0) {
-                statement.setInt(1, id);
-                statement.executeUpdate();
-                resp.sendRedirect("deleted.jsp");
-                statement.close();
-                connection.close();
-            }
-        } catch (NamingException e) {
-            throw new RuntimeException(e);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }*/
-
-       // sendResponse(resp, "id");
-        /*int carID = Integer.parseInt(req.getParameter("id"));
-        if (carID != 0) {
-            sendResponse(resp, new Gson().toJson(crudService.getCarByID(carID)));
-        } else sendResponse(resp,new Gson().toJson(crudService.getAllCars()));*/
-        /*String carMake = req.getParameter("make");
-        if (carMake != null) {
-            sendResponse(resp,new Gson().toJson(crudService.getCarByMake(carMake)));
-        } else sendResponse(resp,new Gson().toJson(crudService.getAllCars()));*/
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         doGet(req,resp);
-        /*String user = req.getParameter("username");
-        String pass = req.getParameter("password");
-        String sql = "INSERT INTO csv_cars_db.login(username,password) VALUES(?,?)";
 
-        try {
-            Connection connection = ConnectMySqlToTomcat.getConnection();
-            PreparedStatement statement = connection.prepareStatement(sql);
-            statement.setString(1,user);
-            statement.setInt(2,Integer.parseInt(pass));
-            statement.executeUpdate();
-
-            resp.sendRedirect("inserted.jsp");
-            statement.close();
-            connection.close();
-
-
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        } catch (NamingException e) {
-            throw new RuntimeException(e);
-        }
-*/
-
-    }
-    private void listLastCar(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
-
-        List<Car> listLastCar = crudService.getLastCarInserted();
-        request.setAttribute("listCar1",listLastCar);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("myCarHomePage.jsp");
-        dispatcher.forward(request,response);
     }
     private void listCar(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
 

@@ -8,21 +8,17 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 
-public class CarService implements CRUDService{
+public class CarService implements CRUDServiceCars{
 
     Connection connection = null;
 
     public CarService() {
-        ConnectMySqlToTomcat connectMySqlToTomcat = new ConnectMySqlToTomcat();
         try {
-            connection = connectMySqlToTomcat.getConnection();
-        } catch (NamingException e) {
-            throw new RuntimeException(e);
-        } catch (SQLException e) {
+            connection = ConnectMySqlToTomcat.getConnection();
+        } catch (NamingException | SQLException e) {
             throw new RuntimeException(e);
         }
     }
-
 
     @Override
     public List<Car> getAllCars() {
@@ -33,8 +29,6 @@ public class CarService implements CRUDService{
     public Car getCarByID(int carID) {
         return CarStatements.getCarByID(connection, carID);
     }
-
-
 
 
     @Override
