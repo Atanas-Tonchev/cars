@@ -19,13 +19,13 @@ public class UsersService implements CRUDServiceUsers{
     }
 
     @Override
-    public boolean getUser(User user) {
-        return UserStatements.validation(user,connection);
+    public boolean insertUser(User user) {
+        return UserStatements.insertUser(user,connection);
     }
 
     @Override
-    public boolean insertUser(User user) {
-        return UserStatements.insertUser(user,connection);
+    public boolean loginCheck(User user) {
+        return UserStatements.validation(user,connection);
     }
 }
 

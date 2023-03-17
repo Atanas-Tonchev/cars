@@ -15,7 +15,5 @@ public class ConnectMySqlToTomcat {
         DataSource ds = (DataSource) envContext.lookup("jdbc/csv_cars_db");
         return ds.getConnection();
     }
-
-
 }
 

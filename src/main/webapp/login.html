@@ -10,9 +10,29 @@
 </head>
 <body>
     <div class="container">
+        <form action="Login" method="post">
+        <div class="form signing">
+            <h2>Sing In</h2>
+                <div class="inputBox">
+                    <input type="text" name="Username" value="" required="required">
+                    <i class="fa-regular fa-user"></i>
+                    <span>username</span>
+                </div>
+                <div class="inputBox">
+                    <input type="password" name="Password" value="" required="required">
+                    <i class="fa-solid fa-lock"></i>
+                    <span>password</span>
+                </div>
+                <div class="inputBox">
+                    <input type="submit" onclick="return submit();" value="Login">
+
+                </div>
+                <p>Not registered ? <a href="#" class="create">Create an account</a></p>
+        </div>
+        </form>
+        <form action="Registration" method="post">
         <div class="form signup">
             <h2>Sing up</h2>
-            <form action="SignUp" method="post">
             <div class="inputBox">
                 <input type="text" class="form-control" name="username" required="required">
                 <i class="fa-regular fa-user"></i>
@@ -27,51 +47,9 @@
                 <input type="submit" value="Create Account">
             </div>
             <p>Already a member ? <a href="#" class="login">Log in</a></p>
-            </form>
         </div>
-        <div class="form signing">
-            <h2>Sing In</h2>
-            <form action="SignIn" method="post" name="form">
-                <div id="errorBox"></div>
-            <div class="inputBox">
-                <input type="text" name="Username" value="" required="required">
-                <i class="fa-regular fa-user"></i>
-                <span>username</span>
-            </div>
-            <div class="inputBox">
-                <input type="password" name="Password" value="" required="required">
-                <i class="fa-solid fa-lock"></i>
-                <span>password</span>
-            </div>
-            <div class="inputBox">
-                <input type="submit" onclick="return submit();" value="Login">
-            </div>
-            <p>Not registered ? <a href="#" class="create">Create an account</a></p>
-        </div>
-
+        </form>
     </div>
-    <script>
-        function submit(){
-            var fpass = document.form.Password.value,
-             fname = document.form.Username.value;
-
-             if(fpass == "") {
-                document.form.Password.focus();
-                document.getElementById("errorBox").innerHTML = "Enter the password";
-                return false;
-             }
-             if(fname == "") {
-                document.form.Username.focus();
-                document.getElementById("errorBox").innerHTML = "Enter the username";
-                return false;
-             }
-             if(fpass != '' && fname != '') {
-                document.getElementById("errorBox").innerHTML = "Form submitted successfully"
-             }
-        }
-        
-    </script>
-
     <script>
         let login = document.querySelector('.login');
         let create = document.querySelector('.create');
@@ -84,6 +62,5 @@
             container.classList.remove('signingForm')
         }
     </script>
-
 </body>
 </html>

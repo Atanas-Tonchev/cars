@@ -1,17 +1,16 @@
 package com.haemimont.cars.users;
 
 public class User {
-    protected String username;
-    protected String password;
-    protected int id;
+     public String username;
+     public String password;
 
-    public User(int id) {
-        this.id = id;
-    }
 
     public User(String username, String password) {
         this.username = username;
         this.password = password;
+    }
+
+    public User() {
     }
 
     public String getUsername() {
@@ -30,20 +29,11 @@ public class User {
         this.password = password;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
     @Override
     public String toString() {
         return "User{" +
                 "username='" + username + '\'' +
                 ", password='" + password + '\'' +
-                ", id=" + id +
                 '}';
     }
 }

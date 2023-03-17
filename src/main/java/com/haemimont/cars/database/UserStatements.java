@@ -1,11 +1,7 @@
 package com.haemimont.cars.database;
-
 import com.haemimont.cars.users.User;
+import java.sql.*;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 
 public class UserStatements {
 
@@ -28,19 +24,41 @@ public class UserStatements {
 
     public static boolean validation(User user,Connection connection){
         boolean status = false;
-        String sql = "SELECT * FROM csv_cars_db.users WHERE user_name = ?,password = ?";
+        String sql = "SELECT user_name,password FROM csv_cars_db.users WHERE user_name = ? and password = ?";
 
         try {
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1,user.getUsername());
             statement.setString(2,user.getPassword());
             ResultSet resultSet = statement.executeQuery();
-            status= resultSet.next();
-
+            status = resultSet.next();
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
         return status;
     }
+
+    /*public static User loginCheck(Connection connection, User toCheck){
+
+        String sql = "SELECT * FROM csv_cars_db.users WHERE user_name = ?,password = ?";
+
+        try {
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1,toCheck.getUsername());
+            statement.setString(2,toCheck.getPassword());
+            ResultSet resultSet = statement.executeQuery();
+
+            if(resultSet.next()) {
+                // if DB returns result, then User is found
+                return new User(resultSet.getString("user_name"),resultSet.getString("password"));
+            }
+            connection.close();
+
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return null;
+    }*/
 }

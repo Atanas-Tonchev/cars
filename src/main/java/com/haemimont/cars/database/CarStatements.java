@@ -290,25 +290,6 @@ public class CarStatements {
 
         return myList;
     }
-    public static int getLoginID(Connection connection) {
-        int id = 0;
-        String sqlLogin = "SELECT login_id FROM csv_cars_db.login";
-
-        try {
-            Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery(sqlLogin);
-
-            while (resultSet.next()) {
-                id = resultSet.getInt(1);
-            }
-            statement.close();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-
-        return id;
-    }
-
 
     public static boolean insertNewCar(Car car, Connection connection) {
         String sql = "INSERT INTO csv_cars_db.dimensions,csv_cars_db.engine_information,csv_cars_db.engine_statistics," +
