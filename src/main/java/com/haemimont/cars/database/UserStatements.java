@@ -1,5 +1,7 @@
 package com.haemimont.cars.database;
 import com.haemimont.cars.users.User;
+import com.haemimont.cars.utils.EncryptionPass;
+
 import java.sql.*;
 
 
@@ -12,7 +14,7 @@ public class UserStatements {
         try {
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1,user.getUsername());
-            statement.setString(2, user.getPassword());
+            statement.setString(2, EncryptionPass.MD5(user.getPassword()));
             boolean rowInserted = statement.executeUpdate() > 0;
             statement.close();
             connection.close();
@@ -38,27 +40,4 @@ public class UserStatements {
         }
         return status;
     }
-
-    /*public static User loginCheck(Connection connection, User toCheck){
-
-        String sql = "SELECT * FROM csv_cars_db.users WHERE user_name = ?,password = ?";
-
-        try {
-            PreparedStatement statement = connection.prepareStatement(sql);
-            statement.setString(1,toCheck.getUsername());
-            statement.setString(2,toCheck.getPassword());
-            ResultSet resultSet = statement.executeQuery();
-
-            if(resultSet.next()) {
-                // if DB returns result, then User is found
-                return new User(resultSet.getString("user_name"),resultSet.getString("password"));
-            }
-            connection.close();
-
-
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-        return null;
-    }*/
 }

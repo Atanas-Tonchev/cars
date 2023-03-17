@@ -2,35 +2,39 @@ package com.haemimont.cars.servlet;
 import com.haemimont.cars.service.CRUDServiceUsers;
 import com.haemimont.cars.service.UsersService;
 import com.haemimont.cars.users.User;
+import com.haemimont.cars.utils.EncryptionPass;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.*;
+
 import java.io.IOException;
 import java.io.PrintWriter;
 
-public class Login extends HttpServlet {
+public class LogInServlet extends HttpServlet {
     CRUDServiceUsers crudServiceUsers = new UsersService();
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html");
         PrintWriter out = resp.getWriter();
         String username = req.getParameter("Username");
-        String pass = req.getParameter("Password");
-        User userCheck = new User(username,pass);
+        String pass = EncryptionPass.MD5(req.getParameter("Password"));
+        User userCheck = new User(username, pass);
 
         if (crudServiceUsers.loginCheck(userCheck)) {
+
             // user found.
-            RequestDispatcher rd = req.getRequestDispatcher("/CarServlet");
-            rd.forward(req, resp);
+            Cookie loginCookie = new Cookie("Username",username);
+            loginCookie.setMaxAge(2*60);
+            resp.addCookie(loginCookie);
+            resp.sendRedirect("welcome.jsp");
+            /*RequestDispatcher rd = req.getRequestDispatcher("welcome.jsp");
+            rd.forward(req, resp);*/
         } else {
             // user not registered.
-            out.println("Invalid Name or Password");
-            RequestDispatcher rd = req.getRequestDispatcher("login.html");
+            out.println("<font color=red>Either user name or password is wrong.</font>");
+            RequestDispatcher rd = getServletContext().getRequestDispatcher("login.html");
             rd.include(req, resp);
         }
-
     }
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+  <meta charset="UTF-8">
+  <title>Registration</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
+        integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="styleLogin.css">
+</head>
+<body>
+    <div class="container">
+        <form action="Registration" method="post">
+            <div class="form signup">
+                <h2>Sing up</h2>
+                <div class="inputBox">
+                    <input type="text" class="form-control" name="username" required="required">
+                    <i class="fa-regular fa-user"></i>
+                    <span>username</span>
+                </div>
+                <div class="inputBox">
+                    <input type="password" class="form-control" name="password" required="required">
+                    <i class="fa-solid fa-lock"></i>
+                    <span>create password</span>
+                </div>
+                <div class="inputBox">
+                    <input type="submit" value="Create Account">
+                </div>
+                <p>Already a member ? <a href="login.html" class="login">Log in</a></p>
+            </div>
+        </form>
+    </div>
+    <script>
+        let login = document.querySelector('.login');
+        let create = document.querySelector('.create');
+        let container = document.querySelector('.container');
+
+        login.onclick = function(){
+            container.classList.add('signingForm')
+        }
+        create.onclick = function(){
+            container.classList.remove('signingForm')
+        }
+    </script>
+
+</body>
+</html>

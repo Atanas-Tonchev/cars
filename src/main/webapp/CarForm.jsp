@@ -1,33 +1,46 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
-          integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
-          crossorigin="anonymous" referrerpolicy="no-referrer" />
-<link rel="stylesheet" href="styleJsp.css" />
+integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
+crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet" href="editBtn.css" />
 <html>
 <head>
     <title>Cars Store Application</title>
+    <style>
+      tr:hover td {
+      background-color: #696969;
+      color: white;
+        }
+    </style>
 </head>
-<body>
-    <center>
+<body style="background-position: center;background-size:cover;" background="wallpaperflare.com_wallpaper.jpg">
+<%
+String userName = null;
+Cookie[] cookies = request.getCookies();
+if(cookies !=null){
+for(Cookie cookie : cookies){
+	if(cookie.getName().equals("Username")) userName = cookie.getValue();
+}
+}
+if(userName == null) response.sendRedirect("login.html");
+%>
+    <center style="color: #C71585;">
         <h1>Cars Management</h1>
         <h2>
-            <a href="./new" class="btn" ><i class="fa fa-car" aria-hidden="true">+</i></a>
-            &nbsp;&nbsp;&nbsp;
-            <a href="./list"class="btn2 "><i class="fa fa-car" aria-hidden="true"><i class="fa-solid fa-list"></i></i></a>
-
+            <a href="CarServlet"class="btn2"><i class="fa fa-car" aria-hidden="true"><i class="fa-solid fa-list"></i></i></a>
         </h2>
     </center>
     <div align="center">
         <c:if test="${car != null}">
-            <form action="./update" method="post">
+            <form action="CarServlet" method="post">
         </c:if>
         <c:if test="${car == null}">
-            <form action="./insert" method="post">
+            <form action="CarServlet" method="post">
         </c:if>
-        <table border="1" cell-padding="5">
+        <table style="background-position: center;background-size:cover;" background="wallpaperflare.com_wallpaper.jpg"  border="1" cell-padding="2">
             <caption>
-                <h2>
+                <h2 style="color: #800000;">
                     <c:if test="${car != null}">
                         Edit Car
                     </c:if>
@@ -186,8 +199,8 @@
                  <tr>
 
                     <td colspan="5" align="center">
-                        <input type="submit" value = "Save" />
-                        <input type="reset" value="Reset">
+                        <input class="btn" type="submit" value = "Save" />
+                        <input type="reset" class="btn1" value="Reset">
                     </td>
                 </tr>
         </table>

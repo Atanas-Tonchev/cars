@@ -3,32 +3,82 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
 integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
 crossorigin="anonymous" referrerpolicy="no-referrer" />
-<link rel="stylesheet" href="styleJsp.css" />
+<link rel="stylesheet" href="addBtn.css" />
+
 <html lang="en">
 <head>
     <title>My Cars</title>
-
+    <style>
+        tr:hover td{
+        background-color: #696969;
+        color: white;
+        }
+    </style>
 </head>
-<body>
+<body background="wallpaperflare.com_wallpaper.jpg" style="background-size: auto;">
+<%
+String userName = null;
+Cookie[] cookies = request.getCookies();
+if(cookies !=null){
+for(Cookie cookie : cookies){
+	if(cookie.getName().equals("Username")) userName = cookie.getValue();
+}
+}
+if(userName == null) response.sendRedirect("login.html");
+%>
     <div class="container">
         <div class="box">
-            <table border="0" cellpadding="5">
-                <center>
+            <center style="color: #B22222;">
                 <h1>WELCOME TO MY SERVER</h1>
-                </center>
+            </center>
             </table>
         </div>
-        <form action="CarServlet" method="post">
-            <table border="0" cellpadding="5">
-               <a href="./new" class="btn" >add new <i class="fa fa-car" aria-hidden="true"></i></a>
-            </table>
+        <form action="CarServlet" method="get" align="right">
+               <a href="CarForm.jsp" class="btn" >add new <i class="fa fa-car" aria-hidden="true"></i></a>
         </form>
     </div>
     <section class="table_body">
+
+        <div align="left">
+            <h2>Select by:</h2>
+            <form action = "">
+                <th>  Year from:
+                    <select style="width:115px;height: 25px; " >
+                        <option></option>
+
+                            <option> 2009 </option>
+
+                    </select>
+                </th>
+                <th> to:
+                    <select style="width:115px;height: 25px; " >
+                        <option></option>
+                        <c:forEach var="select" items="${list}">
+                            <option> 2040 </option>
+                        </c:forEach>
+                    </select>
+                </th>
+                <input class="btn" type="submit" value = "search"
+                style=" width:100px; font-size: 16px; padding: 4px; background: #00FA9A;" />
+            </form>
+            <form action = "">
+               <th>  Model:
+                  <select style="width:115px;height: 25px; " >
+                    <option></option>
+                     <c:forEach var="select" items="${list}">
+                        <option> <c:out value = "${select.identification.make}" /> </option>
+                     </c:forEach>
+                  </select>
+               </th>
+                  <input class="btn" type="submit" value = "search"
+                  style=" width:100px; font-size: 16px; padding: 4px; background: #00FA9A;" />
+            </form>
+        </div>
         <div align="center">
-            <table border="5" cellpadding="1">
+            <table style="background-position: center;background-size:cover;" background="wallpaperflare.com_wallpaper.jpg" border="1" cell-padding="2" >
                <h1>List of Cars</h1>
-                    <tr>
+                    <tr
+                    style=" background: none; color: #000000; text-align: center; ">
                         <th>ID</th>
                         <th> Dimensions Height </th>
                         <th> Dimensions Length </th>
@@ -48,9 +98,11 @@ crossorigin="anonymous" referrerpolicy="no-referrer" />
                         <th> Make </th>
                         <th> Model & Year </th>
                         <th> Year </th>
+                        <th> Edit </th>
+                        <th> Delete </th>
                     </tr>
                         <c:forEach var="car" items="${list}">
-                            <tr>
+                            <tr style=" background: none; color: #000000;">
                                 <td><c:out value = '${car.id}' /></td>
                                 <td><c:out value = "${car.dimensions.height}" /></td>
                                 <td><c:out value = "${car.dimensions.length}" /></td>
@@ -71,10 +123,15 @@ crossorigin="anonymous" referrerpolicy="no-referrer" />
                                 <td><c:out value = "${car.identification.modelYear}" /></td>
                                 <td><c:out value = "${car.identification.year}" /></td>
                                 <td>
-                                    <a href="./edit?id=<c:out value='${car.id}' />" <i class="fa fa-pencil-square" aria-hidden="true"></i></a>
-
+                                    <a href="CarUpdate?carId=<c:out value='${car.id}' />">
+                                    <center><i class="fa fa-pencil-square" aria-hidden="true"></i></center>
+                                    </a>
                                 </td>
-                                <td><a href="./delete?id=<c:out value='${car.id}' />"<i class="fa fa-trash" aria-hidden="true"></i></a></td>
+                                <td>
+                                    <a href="CarDelete?carId=<c:out value='${car.id}' />" >
+                                    <center><i class="fa fa-trash" aria-hidden="true"></i></center>
+                                    </a>
+                                </td>
                             </tr>
                         </c:forEach>
             </table>

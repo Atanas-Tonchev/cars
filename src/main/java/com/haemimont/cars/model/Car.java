@@ -5,7 +5,7 @@ public class Car {
     EngineInformation engineInformation;
     FuelInformation fuelInformation;
     Identification identification;
-    protected int id;
+    private int id;
 
     public Car(Dimensions dimensions, EngineInformation engineInformation,
                FuelInformation fuelInformation, Identification identification, int id) {
@@ -31,9 +31,6 @@ public class Car {
     public Car(int id) {
         this.id = id;
     }
-
-
-
 
     public Dimensions getDimensions() {
         return dimensions;

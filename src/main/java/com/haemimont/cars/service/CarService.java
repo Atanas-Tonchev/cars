@@ -9,7 +9,6 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class CarService implements CRUDServiceCars{
-
     Connection connection = null;
 
     public CarService() {
@@ -20,35 +19,28 @@ public class CarService implements CRUDServiceCars{
         }
     }
 
+
     @Override
     public List<Car> getAllCars() {
-        return CarStatements.getCars(connection);
+        return CarStatements.allCars(connection);
     }
 
     @Override
     public Car getCarByID(int carID) {
-        return CarStatements.getCarByID(connection, carID);
+        return CarStatements.carByID(connection, carID);
     }
-
-
-    @Override
-    public boolean insertNewCars(Car car) {
-        return CarStatements.insertNewCar(car,connection);
+    public void deleteCar(int carID){
+        CarStatements.delete(carID, connection);
     }
 
     @Override
-    public boolean deleteCar(Car car) {
-        return CarStatements.deleteCar(car,connection);
+    public void insertCar(Car car) {
+        CarStatements.insert(car, connection);
     }
 
     @Override
-    public boolean updateCar(Car car) {
-        return CarStatements.updateCar(car,connection);
+    public void updateCar(Car car) {
+        CarStatements.update(car, connection);
     }
-
-    @Override
-    public List<Car> getLastCarInserted() {
-        return CarStatements.getLastCarsInserted(connection);
-    }
-
 }
+

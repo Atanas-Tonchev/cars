@@ -8,7 +8,7 @@ import java.util.List;
 public class CarStatements {
 
 
-    public static int insertCar(Car car, Connection connection) {
+    public static void insert(Car car, Connection connection) {
 
         int result = 0;
 
@@ -33,7 +33,6 @@ public class CarStatements {
 
             if (resultSet.next()) {
                 result = resultSet.getInt(1);
-                System.out.println("Tale 'Car' is created with ID: " + result);
             }
 
             preparedStatement.close();
@@ -42,7 +41,6 @@ public class CarStatements {
             throw new RuntimeException();
         }
 
-        return result;
     }
 
     public static int insertEngineStatic(EngineStatistics engineStatistics, Connection connection) {
@@ -61,7 +59,6 @@ public class CarStatements {
 
             if (resultStatic.next()) {
                 result = resultStatic.getInt(1);
-                System.out.println("Table 'Engine Static' is created with ID: " + result);
             } else {
                 System.out.println("No data inserted.");
             }
@@ -97,7 +94,6 @@ public class CarStatements {
 
             if (resultSet.next()) {
                 result = resultSet.getInt(1);
-                System.out.println("Table 'Identification' is created with ID: " + result);
             } else {
                 System.out.println("No data inserted.");
             }
@@ -167,7 +163,6 @@ public class CarStatements {
 
             if (resultSet.next()) {
                 result = resultSet.getInt(1);
-                System.out.println("Table 'Engine Information' is created with ID: " + result);
 
             } else {
                 System.out.println("No data inserted.");
@@ -214,124 +209,8 @@ public class CarStatements {
         return result;
     }
 
-    public static List<Car> getCarsByMake(Connection connection, String make) {
 
-        List<Car> myList = new ArrayList<>();
-
-
-        String sqlAudi = "SELECT " +
-                "height,length,width,drive_line,engine_type,hybrid,transmission," +
-                "number_of_forward_gears,horsepower,torque,fuel_type," +
-                "city_mpg,highway_mpg,classification,identification.id,make,model_year,identification.year " +
-                "FROM " +
-                "csv_cars_db.car " +
-                "INNER JOIN " +
-                "csv_cars_db.dimensions " +
-                "ON " +
-                "dimensions.dimensions_id = car.dimensions_dimensions_id " +
-                "INNER JOIN " +
-                "csv_cars_db.engine_information " +
-                "ON " +
-                "engine_information.engine_information_id = car.engine_information_engine_information_id " +
-                "INNER JOIN " +
-                "csv_cars_db.engine_statistics " +
-                "ON " +
-                "engine_statistics.engine_statistics_id = engine_information.engine_statistics_engine_statistics_id " +
-                "INNER JOIN " +
-                "csv_cars_db.fuel_information " +
-                "ON " +
-                "fuel_information.fuel_information_id = car.fuel_information_fuel_information_id " +
-                "INNER JOIN " +
-                "csv_cars_db.identification " +
-                "ON " +
-                "identification.identification_id = car.identification_identification_id " +
-                "WHERE identification.make = ? ";
-
-
-        try {
-            PreparedStatement statement = connection.prepareStatement(sqlAudi);
-            statement.setString(1, make);
-            ResultSet resultSet = statement.executeQuery();
-
-            while (resultSet.next()) {
-
-
-                myList.add(new Car(new Dimensions((int) resultSet.getObject("height"),
-                        (int) resultSet.getObject("length"),
-                        (int) resultSet.getObject("width")),
-                        new EngineInformation((String) resultSet.getObject("drive_line"),
-                                (String) resultSet.getObject("engine_type"),
-                                (String) resultSet.getObject("hybrid"),
-                                (String) resultSet.getObject("transmission"),
-                                (Integer) resultSet.getObject("number_of_forward_gears"),
-                                new EngineStatistics((Integer) resultSet.getObject("horsepower"),
-                                        (Integer) resultSet.getObject("torque"))),
-                        new FuelInformation((String) resultSet.getObject("fuel_type"),
-                                (Integer) resultSet.getObject("city_mpg"),
-                                (Integer) resultSet.getObject("highway_mpg")),
-                        new Identification((String) resultSet.getObject("classification"),
-                                (String) resultSet.getObject("identification.id"),
-                                (String) resultSet.getObject("make"),
-                                (String) resultSet.getObject("model_year"),
-                                (Integer) resultSet.getObject("year"))));
-
-
-                for (int i = 0; i < myList.size(); i++) {
-                    System.out.println(myList.get(i));
-
-                }
-
-
-            }
-            statement.close();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-
-        return myList;
-    }
-
-    public static boolean insertNewCar(Car car, Connection connection) {
-        String sql = "INSERT INTO csv_cars_db.dimensions,csv_cars_db.engine_information,csv_cars_db.engine_statistics," +
-                "csv_cars_db.fuel_information,csv_cars_db.identification " +
-                "(height,length,width,drive_line,engine_type,hybrid,transmission," +
-                " number_of_forward_gears,horsepower,torque,fuel_type," +
-                "city_mpg,highway_mpg,classification,identification.id,make,model_year,identification.year) " +
-                "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-
-        try {
-            PreparedStatement statement = connection.prepareStatement(sql);
-            statement.setInt(1, car.getDimensions().getHeight());
-            statement.setInt(2, car.getDimensions().getLength());
-            statement.setInt(3, car.getDimensions().getWidth());
-            statement.setString(4, car.getEngineInformation().getDriveLine());
-            statement.setString(5, car.getEngineInformation().getEngineType());
-            statement.setString(6, car.getEngineInformation().getHybrid());
-            statement.setString(7, car.getEngineInformation().getTransmission());
-            statement.setInt(8, car.getEngineInformation().getNumberOfForwardGears());
-            statement.setInt(9, car.getEngineInformation().getEngineStatistics().getHorsepower());
-            statement.setInt(10, car.getEngineInformation().getEngineStatistics().getTorque());
-            statement.setString(11, car.getFuelInformation().getFuelType());
-            statement.setInt(12, car.getFuelInformation().getCityMpg());
-            statement.setInt(13, car.getFuelInformation().getHighwayMpg());
-            statement.setString(14, car.getIdentification().getClassification());
-            statement.setString(15, car.getIdentification().getID());
-            statement.setString(16, car.getIdentification().getMake());
-            statement.setString(17, car.getIdentification().getModelYear());
-            statement.setInt(18, car.getIdentification().getYear());
-
-            boolean rowInserted = statement.executeUpdate() > 0;
-            statement.close();
-            connection.close();
-            return rowInserted;
-
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-
-    }
-
-    public static List<Car> getCars(Connection connection) {
+    public static List<Car> allCars(Connection connection) {
 
         List<Car> myList = new ArrayList<>();
 
@@ -388,7 +267,7 @@ public class CarStatements {
                 "csv_cars_db.identification " +
                 "ON " +
                 "identification.identification_id = car.identification_identification_id " +
-                "ORDER BY car_id DESC LIMIT 1)" ;
+                "ORDER BY car_id DESC LIMIT 5)" ;
 
         try {
             Statement statement = connection.createStatement();
@@ -430,48 +309,29 @@ public class CarStatements {
         }
     }
 
-    public static boolean deleteCar(Car car, Connection connection) {
-        String sqlDelete = "DELETE height,length,width,drive_line,engine_type,hybrid,transmission," +
-                "number_of_forward_gears,horsepower,torque,fuel_type," +
-                "city_mpg,highway_mpg,classification,identification.id,make,model_year,identification.year" +
-                "FROM csv_cars_db.car INNER JOIN csv_cars_db.dimensions " +
-                "ON " +
-                "dimensions.dimensions_id = car.dimensions_dimensions_id " +
-                "INNER JOIN " +
-                "csv_cars_db.engine_information " +
-                "ON " +
-                "engine_information.engine_information_id = car.engine_information_engine_information_id " +
-                "INNER JOIN " +
-                "csv_cars_db.engine_statistics " +
-                "ON " +
-                "engine_statistics.engine_statistics_id = engine_information.engine_statistics_engine_statistics_id " +
-                "INNER JOIN " +
-                "csv_cars_db.fuel_information " +
-                "ON " +
-                "fuel_information.fuel_information_id = car.fuel_information_fuel_information_id " +
-                "INNER JOIN " +
-                "csv_cars_db.identification " +
-                "ON " +
-                "identification.identification_id = car.identification_identification_id " +
-                "WHERE car.car_id = ?";
-        ;
+    public static void delete(int carID, Connection connection) {
+        String sqlDelete = "DELETE csv_cars_db.car,csv_cars_db.dimensions,csv_cars_db.engine_information," +
+                "csv_cars_db.engine_statistics,csv_cars_db.fuel_information,csv_cars_db.identification " +
+                "FROM csv_cars_db.car INNER JOIN csv_cars_db.dimensions ON dimensions_id = dimensions_dimensions_id " +
+                "INNER JOIN csv_cars_db.engine_information ON engine_information_id = engine_information_engine_information_id " +
+                "INNER JOIN csv_cars_db.engine_statistics ON engine_statistics_id = engine_statistics_engine_statistics_id " +
+                "INNER JOIN csv_cars_db.fuel_information ON fuel_information_id=fuel_information_fuel_information_id " +
+                "INNER JOIN csv_cars_db.identification ON identification_id=identification_identification_id WHERE car.car_id = ?";
 
         try {
-            PreparedStatement statement = connection.prepareStatement(sqlDelete);
-            statement.setInt(1, car.getId());
+            PreparedStatement preparedStatement = connection.prepareStatement(sqlDelete);
 
-            boolean rowDeleted = statement.executeUpdate() > 0;
-            statement.close();
-            connection.close();
+            preparedStatement.setInt(1, carID);
+            preparedStatement.executeUpdate();
 
-            return rowDeleted;
+            System.out.println("--correct deleted car");
 
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            System.out.println("--incorrect deleted car. " + e.getMessage());
         }
     }
 
-    public static boolean updateCar(Car car, Connection connection) {
+    public static void update(Car car, Connection connection) {
         String sqlUpdate = "UPDATE csv_cars_db.car,csv_cars_db.dimensions,csv_cars_db.engine_information," +
                 "csv_cars_db.engine_statistics," +
                 "csv_cars_db.fuel_information,csv_cars_db.identification" +
@@ -519,22 +379,21 @@ public class CarStatements {
             statement.setString(16, car.getIdentification().getMake());
             statement.setString(17, car.getIdentification().getModelYear());
             statement.setInt(18, car.getIdentification().getYear());
+            statement.setInt(19,car.getId());
 
-            boolean rowUpdate = statement.executeUpdate() > 0;
-            statement.close();
-            connection.close();
-            return rowUpdate;
+            statement.executeUpdate();
+            System.out.println("--correct update on database");
 
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            System.out.println("--incorrect update on database. " + e.getMessage());
         }
 
     }
 
-    public static Car getCarByID(Connection connection, int id) {
-        Car car = null;
+    public static Car carByID(Connection connection, int id) {
+
         String sqlCarsById = "SELECT " +
-                "height,length,width,drive_line,engine_type,hybrid,transmission," +
+                "car_id,height,length,width,drive_line,engine_type,hybrid,transmission," +
                 "number_of_forward_gears,horsepower,torque,fuel_type," +
                 "city_mpg,highway_mpg,classification,identification.id,make,model_year,identification.year " +
                 "FROM " +
@@ -563,114 +422,33 @@ public class CarStatements {
 
 
         try {
+            Car car = new Car();
             PreparedStatement statement = connection.prepareStatement(sqlCarsById);
             statement.setInt(1, id);
             ResultSet resultSet = statement.executeQuery();
 
-            if (resultSet.next()) {
-                int dimH = resultSet.getInt("height");
-                int dimL = resultSet.getInt("length");
-                int dimW = resultSet.getInt("width");
-                String driveLine = resultSet.getString("drive_line");
-                String engineType = resultSet.getString("engine_type");
-                String hybrid = resultSet.getString("hybrid");
-                String transmission = resultSet.getString("transmission");
-                int numOfGears = resultSet.getInt("number_of_forward_gears");
-                int horsePower = resultSet.getInt("horsepower");
-                int torque = resultSet.getInt("torque");
-                String fuelType = resultSet.getString("fuel_type");
-                int cityMpg = resultSet.getInt("city_mpg");
-                int highwayMpg = resultSet.getInt("highway_mpg");
-                String classification = resultSet.getString("classification");
-                String identificationId = resultSet.getString("id");
-                String make = resultSet.getString("make");
-                String modelYear = resultSet.getString("model_year");
-                int year = resultSet.getInt("year");
-
-                car = new Car(new Dimensions(dimH, dimL, dimW), new EngineInformation(driveLine, engineType, hybrid,
-                        transmission, numOfGears, new EngineStatistics(horsePower, torque)), new FuelInformation(fuelType,
-                        cityMpg, highwayMpg), new Identification(classification, identificationId, make, modelYear, year), id);
-
-                resultSet.close();
-                statement.close();
-
-
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-        return car;
-    }
-
-    public static List<Car> getLastCarsInserted(Connection connection) {
-
-        List<Car> myList = new ArrayList<>();
-
-        String sqlLastCar = "SELECT " +
-                "height,length,width,drive_line,engine_type,hybrid,transmission," +
-                "number_of_forward_gears,horsepower,torque,fuel_type," +
-                "city_mpg,highway_mpg,classification,identification.id,make,model_year,identification.year " +
-                "FROM " +
-                "csv_cars_db.car " +
-                "INNER JOIN " +
-                "csv_cars_db.dimensions " +
-                "ON " +
-                "dimensions.dimensions_id = car.dimensions_dimensions_id " +
-                "INNER JOIN " +
-                "csv_cars_db.engine_information " +
-                "ON " +
-                "engine_information.engine_information_id = car.engine_information_engine_information_id " +
-                "INNER JOIN " +
-                "csv_cars_db.engine_statistics " +
-                "ON " +
-                "engine_statistics.engine_statistics_id = engine_information.engine_statistics_engine_statistics_id " +
-                "INNER JOIN " +
-                "csv_cars_db.fuel_information " +
-                "ON " +
-                "fuel_information.fuel_information_id = car.fuel_information_fuel_information_id " +
-                "INNER JOIN " +
-                "csv_cars_db.identification " +
-                "ON " +
-                "identification.identification_id = car.identification_identification_id " +
-                "ORDER BY car_id DESC LIMIT 1;";
-
-        try {
-            Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery(sqlLastCar);
-
             while (resultSet.next()) {
-                int id = resultSet.getInt("car_id");
-                int dimH = resultSet.getInt("height");
-                int dimL = resultSet.getInt("length");
-                int dimW = resultSet.getInt("width");
-                String driveLine = resultSet.getString("drive_line");
-                String engineType = resultSet.getString("engine_type");
-                String hybrid = resultSet.getString("hybrid");
-                String transmission = resultSet.getString("transmission");
-                int numOfGears = resultSet.getInt("number_of_forward_gears");
-                int horsePower = resultSet.getInt("horsepower");
-                int torque = resultSet.getInt("torque");
-                String fuelType = resultSet.getString("fuel_type");
-                int cityMpg = resultSet.getInt("city_mpg");
-                int highwayMpg = resultSet.getInt("highway_mpg");
-                String classification = resultSet.getString("classification");
-                String identificationId = resultSet.getString("id");
-                String make = resultSet.getString("make");
-                String modelYear = resultSet.getString("model_year");
-                int year = resultSet.getInt("year");
-
-                Car car = new Car(new Dimensions(dimH, dimL, dimW), new EngineInformation(driveLine, engineType, hybrid,
-                        transmission, numOfGears, new EngineStatistics(horsePower, torque)), new FuelInformation(fuelType,
-                        cityMpg, highwayMpg), new Identification(classification, identificationId, make, modelYear, year), id);
-
-                myList.add(car);
-
+                car.setId(Integer.parseInt(resultSet.getString("car_id")));
+                car.setDimensions(new Dimensions(resultSet.getInt("height"),
+                        resultSet.getInt("length"), resultSet.getInt("width")));
+                car.setEngineInformation(new EngineInformation(resultSet.getString("drive_line"),
+                        resultSet.getString("engine_type"),
+                        resultSet.getString("hybrid"), resultSet.getString("transmission"),
+                        resultSet.getInt("number_of_forward_gears"),
+                        new EngineStatistics(resultSet.getInt("horsepower"),
+                                resultSet.getInt("torque"))));
+                car.setFuelInformation(new FuelInformation(resultSet.getString("fuel_type"),
+                        resultSet.getInt("city_mpg"), resultSet.getInt("highway_mpg")));
+                car.setIdentification(new Identification(resultSet.getString("classification"),
+                        resultSet.getString("id"), resultSet.getString("make"),
+                        resultSet.getString("model_year"), resultSet.getInt("year")));
             }
-            resultSet.close();
-            statement.close();
-            return myList;
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
+            System.out.println("--correct find by id cars");
+            return car;
+
+        } catch(SQLException e) {
+            System.out.println("--incorrect find by id cars. " + e.getMessage());
+            return null;
         }
     }
 }

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Login & Registration</title>
+    <title>Login</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
           integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
           crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -10,44 +10,24 @@
 </head>
 <body>
     <div class="container">
-        <form action="Login" method="post">
-        <div class="form signing">
-            <h2>Sing In</h2>
-                <div class="inputBox">
-                    <input type="text" name="Username" value="" required="required">
-                    <i class="fa-regular fa-user"></i>
-                    <span>username</span>
-                </div>
-                <div class="inputBox">
-                    <input type="password" name="Password" value="" required="required">
-                    <i class="fa-solid fa-lock"></i>
-                    <span>password</span>
-                </div>
-                <div class="inputBox">
-                    <input type="submit" onclick="return submit();" value="Login">
-
-                </div>
-                <p>Not registered ? <a href="#" class="create">Create an account</a></p>
-        </div>
-        </form>
-        <form action="Registration" method="post">
-        <div class="form signup">
-            <h2>Sing up</h2>
-            <div class="inputBox">
-                <input type="text" class="form-control" name="username" required="required">
-                <i class="fa-regular fa-user"></i>
-                <span>username</span>
+        <form action="LogInServlet" method="post">
+            <div class="form signing">
+                <h2>Sing In</h2>
+                    <div class="inputBox">
+                        <input type="text" name="Username" value="" required="required">
+                        <i class="fa-regular fa-user"></i>
+                        <span>username</span>
+                    </div>
+                    <div class="inputBox">
+                        <input type="password" name="Password" value="" required="required">
+                        <i class="fa-solid fa-lock"></i>
+                        <span>password</span>
+                    </div>
+                    <div class="inputBox">
+                        <input type="submit" onclick="return submit();" value="Login">
+                    </div>
+                    <p>Not registered ? <a href="registration.html" class="create">Create an account</a></p>
             </div>
-            <div class="inputBox">
-                <input type="password" class="form-control" name="password" required="required">
-                <i class="fa-solid fa-lock"></i>
-                <span>create password</span>
-            </div>
-            <div class="inputBox">
-                <input type="submit" value="Create Account">
-            </div>
-            <p>Already a member ? <a href="#" class="login">Log in</a></p>
-        </div>
         </form>
     </div>
     <script>

@@ -12,20 +12,11 @@ public class DataBaseUtil {
 
         for (Map.Entry<Object, Car> carEntry : carMap.entrySet()) {
 
-            CarStatements.insertCar(carEntry.getValue(), connection);
+            //CarStatements.insertCar(carEntry.getValue(), connection);
 
         }
 
         return isEmpty;
     }
-
-    public static boolean selectMakeFromDB(Connection connection) {
-        boolean noData = false;
-        String make = "Acura";
-        CarStatements.getCarsByMake(connection, make);
-        return noData;
-    }
-
-
 }
 
