@@ -9,6 +9,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 public class CarUpdate extends HttpServlet {
     CRUDServiceCars crudServiceCars = new CarService();
@@ -17,7 +18,7 @@ public class CarUpdate extends HttpServlet {
         int carId = Integer.parseInt(req.getParameter("carId"));
         Car car = crudServiceCars.getCarByID(carId);
         req.setAttribute("car",car);
-        RequestDispatcher requestDispatcher = req.getRequestDispatcher("CarForm.jsp");
+        RequestDispatcher requestDispatcher = req.getRequestDispatcher("carForm.jsp");
         requestDispatcher.forward(req,resp);
     }
 
@@ -38,7 +39,5 @@ public class CarUpdate extends HttpServlet {
                 req.getParameter("make"),req.getParameter("modelYear"),Integer.parseInt(req.getParameter("year"))));
 
         crudServiceCars.updateCar(carUpdate);
-        CarServlet carServlet = new CarServlet();
-        carServlet.doGet(req,resp);
     }
 }

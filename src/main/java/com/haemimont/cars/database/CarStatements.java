@@ -10,7 +10,7 @@ public class CarStatements {
 
     public static void insert(Car car, Connection connection) {
 
-        int result = 0;
+
 
         String sqlCar = "INSERT INTO csv_cars_db.car (dimensions_dimensions_id," +
                 "fuel_information_fuel_information_id," +
@@ -32,12 +32,15 @@ public class CarStatements {
             ResultSet resultSet = preparedStatement.getGeneratedKeys();
 
             if (resultSet.next()) {
-                result = resultSet.getInt(1);
+                resultSet.getInt(1);
+                System.out.println("--correct insert Car in database.");
+            }else {
+                System.out.println("No data inserted.");
             }
-
             preparedStatement.close();
 
         } catch (Exception e) {
+            System.out.println("--incorrect insert Car in database. " + e.getMessage());
             throw new RuntimeException();
         }
 
@@ -64,6 +67,7 @@ public class CarStatements {
             }
 
             statement.close();
+
 
         } catch (Exception e) {
             throw new RuntimeException();
@@ -100,6 +104,7 @@ public class CarStatements {
 
             statement.close();
 
+
         } catch (Exception e) {
             throw new RuntimeException();
         }
@@ -130,6 +135,7 @@ public class CarStatements {
             }
 
             statement.close();
+
 
         } catch (Exception e) {
             throw new RuntimeException();
@@ -170,6 +176,7 @@ public class CarStatements {
 
             statement.close();
 
+
         } catch (Exception e) {
             throw new RuntimeException();
         }
@@ -201,6 +208,7 @@ public class CarStatements {
             }
 
             statement.close();
+
 
         } catch (Exception e) {
             throw new RuntimeException();
@@ -301,8 +309,9 @@ public class CarStatements {
                 myList.add(car);
 
             }
-            resultSet.close();
+
             statement.close();
+
             return myList;
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -326,8 +335,11 @@ public class CarStatements {
 
             System.out.println("--correct deleted car");
 
+            preparedStatement.close();
+
         } catch (SQLException e) {
             System.out.println("--incorrect deleted car. " + e.getMessage());
+            throw new RuntimeException(e);
         }
     }
 
@@ -384,8 +396,12 @@ public class CarStatements {
             statement.executeUpdate();
             System.out.println("--correct update on database");
 
+            statement.close();
+
+
         } catch (SQLException e) {
             System.out.println("--incorrect update on database. " + e.getMessage());
+            throw new RuntimeException(e);
         }
 
     }
@@ -442,13 +458,14 @@ public class CarStatements {
                 car.setIdentification(new Identification(resultSet.getString("classification"),
                         resultSet.getString("id"), resultSet.getString("make"),
                         resultSet.getString("model_year"), resultSet.getInt("year")));
+
             }
             System.out.println("--correct find by id cars");
             return car;
 
         } catch(SQLException e) {
             System.out.println("--incorrect find by id cars. " + e.getMessage());
-            return null;
+            throw new RuntimeException(e);
         }
     }
 }

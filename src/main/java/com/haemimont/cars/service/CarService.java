@@ -1,8 +1,8 @@
 package com.haemimont.cars.service;
 
+import com.haemimont.cars.database.CarSearchStatements;
 import com.haemimont.cars.database.CarStatements;
 import com.haemimont.cars.model.Car;
-
 import javax.naming.NamingException;
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -29,8 +29,21 @@ public class CarService implements CRUDServiceCars{
     public Car getCarByID(int carID) {
         return CarStatements.carByID(connection, carID);
     }
-    public void deleteCar(int carID){
+
+    @Override
+    public List<Car> getCarByYear(int fromYear, int toYear) {
+        return CarSearchStatements.carsByYear(connection,fromYear,toYear);
+    }
+
+    @Override
+    public List<Car> getCarByMake(String make) {
+        return CarSearchStatements.carsByMake(connection,make);
+    }
+
+
+    public boolean deleteCar(int carID){
         CarStatements.delete(carID, connection);
+        return false;
     }
 
     @Override

@@ -8,14 +8,21 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+
+import static java.lang.System.out;
 
 public class CarDelete extends HttpServlet {
     CRUDServiceCars crudServiceCars = new CarService();
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        PrintWriter out = resp.getWriter();
         int carId = Integer.parseInt(req.getParameter("carId"));
-        crudServiceCars.deleteCar(carId);
-        CarServlet carServlet = new CarServlet();
-        carServlet.doGet(req, resp);
+        if(crudServiceCars.deleteCar(carId)) {
+            out.println("<font color=red>Error delete. Please try again.</font>");
+        }else {
+            resp.sendRedirect("deleteSuccess.jsp");
+        }
+
     }
 }

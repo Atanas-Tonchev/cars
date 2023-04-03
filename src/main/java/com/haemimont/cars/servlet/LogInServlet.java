@@ -24,7 +24,7 @@ public class LogInServlet extends HttpServlet {
 
             // user found.
             Cookie loginCookie = new Cookie("Username",username);
-            loginCookie.setMaxAge(2*60);
+            loginCookie.setMaxAge(15*60);
             resp.addCookie(loginCookie);
             resp.sendRedirect("welcome.jsp");
             /*RequestDispatcher rd = req.getRequestDispatcher("welcome.jsp");
@@ -32,6 +32,8 @@ public class LogInServlet extends HttpServlet {
         } else {
             // user not registered.
             out.println("<font color=red>Either user name or password is wrong.</font>");
+            out.println("<p>Please try again ! <a href=\"login.html\" class=\"create\">Login</a></p>");
+            out.println("<p>Not registered ? <a href=\"registration.html\">Create an account</a></p>");
             RequestDispatcher rd = getServletContext().getRequestDispatcher("login.html");
             rd.include(req, resp);
         }

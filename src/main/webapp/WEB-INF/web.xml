@@ -1,6 +1,9 @@
 <?xml version = "1.0" encoding = "UTF-8"?>
 <web-app>
-
+    <servlet>
+        <servlet-name>search</servlet-name>
+        <servlet-class>com.haemimont.cars.servlet.SearchServlet</servlet-class>
+    </servlet>
     <servlet>
         <servlet-name>car</servlet-name>
         <servlet-class>com.haemimont.cars.servlet.CarServlet</servlet-class>
@@ -40,6 +43,10 @@
     <servlet-mapping>
         <servlet-name>car</servlet-name>
         <url-pattern>/CarServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>search</servlet-name>
+        <url-pattern>/SearchServlet</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>deleteCar</servlet-name>

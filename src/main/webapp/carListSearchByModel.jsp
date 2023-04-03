@@ -26,6 +26,9 @@ for(Cookie cookie : cookies){
 }
 if(userName == null) response.sendRedirect("login.html");
 %>
+<form action="CarServlet" align="left">
+   <input type="submit" class="btn" value="Home"  >
+</form>
     <div class="container">
         <div class="box">
             <center style="color: #B22222;">
@@ -34,44 +37,21 @@ if(userName == null) response.sendRedirect("login.html");
             </table>
         </div>
         <form action="CarServlet" method="get" align="right">
-               <a href="CarForm.jsp" class="btn" >add new <i class="fa fa-car" aria-hidden="true"></i></a>
+               <a href="carForm.jsp" class="btn" >add new <i class="fa fa-car" aria-hidden="true"></i></a>
         </form>
     </div>
     <section class="table_body">
 
         <div align="left">
-            <h2>Select by:</h2>
-            <form action = "">
-                <th>  Year from:
-                    <select style="width:115px;height: 25px; " >
-                        <option></option>
-
-                            <option> 2009 </option>
-
-                    </select>
-                </th>
-                <th> to:
-                    <select style="width:115px;height: 25px; " >
-                        <option></option>
-                        <c:forEach var="select" items="${list}">
-                            <option> 2040 </option>
-                        </c:forEach>
-                    </select>
-                </th>
+            <form action = "SearchServlet" method="post">
+               <th>  Model:
+                  <tr style="width:115px;height: 25px; " >
+                     <input type="text" name="model">
+                  </tr>
+               </th>
                 <input class="btn" type="submit" value = "search"
                 style=" width:100px; font-size: 16px; padding: 4px; background: #00FA9A;" />
-            </form>
-            <form action = "">
-               <th>  Model:
-                  <select style="width:115px;height: 25px; " >
-                    <option></option>
-                     <c:forEach var="select" items="${list}">
-                        <option> <c:out value = "${select.identification.make}" /> </option>
-                     </c:forEach>
-                  </select>
-               </th>
-                  <input class="btn" type="submit" value = "search"
-                  style=" width:100px; font-size: 16px; padding: 4px; background: #00FA9A;" />
+
             </form>
         </div>
         <div align="center">
@@ -101,7 +81,7 @@ if(userName == null) response.sendRedirect("login.html");
                         <th> Edit </th>
                         <th> Delete </th>
                     </tr>
-                        <c:forEach var="car" items="${list}">
+                        <c:forEach var="car" items="${listByModel}">
                             <tr style=" background: none; color: #000000;">
                                 <td><c:out value = '${car.id}' /></td>
                                 <td><c:out value = "${car.dimensions.height}" /></td>

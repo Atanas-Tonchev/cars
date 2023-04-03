@@ -9,9 +9,12 @@ public interface CRUDServiceCars {
     List<Car> getAllCars();
 
     Car getCarByID(int carID);
+    List<Car> getCarByYear(int fromYear, int toYear);
+    List<Car> getCarByMake(String make);
+
 
     /*boolean deleteCar(Car car);*/
-    void deleteCar(int carID);
+    boolean deleteCar(int carID);
     void insertCar(Car car);
     void updateCar(Car car);
 

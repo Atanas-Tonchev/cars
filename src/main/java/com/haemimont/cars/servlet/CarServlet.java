@@ -8,7 +8,6 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.sql.*;
 import java.util.List;
 
 
@@ -20,7 +19,7 @@ public class CarServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         List<Car> list = crudService.getAllCars();
         req.setAttribute("list", list);
-        RequestDispatcher dispatcher = req.getRequestDispatcher("CarList.jsp");
+        RequestDispatcher dispatcher = req.getRequestDispatcher("carList.jsp");
         dispatcher.forward(req,resp);
 
     }
@@ -55,38 +54,4 @@ public class CarServlet extends HttpServlet {
         doGet(req,resp);
         resp.sendRedirect("list");
     }
-
-
-
-    private void updateCar(HttpServletRequest request, HttpServletResponse response)
-            throws SQLException, IOException {
-        int id = Integer.parseInt(request.getParameter("id"));
-        int dimH = Integer.parseInt(request.getParameter("height"));
-        int dimL = Integer.parseInt(request.getParameter("length"));
-        int dimW = Integer.parseInt(request.getParameter("width"));
-        String driveLine = request.getParameter("driveLine");
-        String engineType = request.getParameter("engineType");
-        String hybrid = request.getParameter("hybrid");
-        String transmission = request.getParameter("transmission");
-        int numOfGears = Integer.parseInt(request.getParameter("numberOfForwardGears"));
-        int horsePower = Integer.parseInt(request.getParameter("horsepower"));
-        int torque = Integer.parseInt(request.getParameter("torque"));
-        String fuelType = request.getParameter("fuelType");
-        int cityMpg = Integer.parseInt(request.getParameter("cityMpg"));
-        int highwayMpg = Integer.parseInt(request.getParameter("highwayMpg"));
-        String classification = request.getParameter("classification");
-        String identificationId = request.getParameter("ID");
-        String make = request.getParameter("make");
-        String modelYear = request.getParameter("modelYear");
-        int year = Integer.parseInt(request.getParameter("year"));
-
-        Car updateCar = new Car(new Dimensions(dimH, dimL, dimW), new EngineInformation(driveLine, engineType, hybrid,
-                transmission, numOfGears, new EngineStatistics(horsePower, torque)), new FuelInformation(fuelType,
-                cityMpg, highwayMpg), new Identification(classification, identificationId, make, modelYear, year),id);
-
-        crudService.updateCar(updateCar);
-        response.sendRedirect("list");
-
-    }
-
 }
