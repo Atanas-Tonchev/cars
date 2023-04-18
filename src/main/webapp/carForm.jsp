@@ -14,7 +14,7 @@ crossorigin="anonymous" referrerpolicy="no-referrer" />
         }
     </style>
 </head>
-<body style="background-position: center;background-size:cover;" background="wallpaperflare.com_wallpaper.jpg">
+<body style="background-position: center;background-size:cover;" background="pics/wallpaperflare.com_wallpaper.jpg">
 <%
 String userName = null;
 Cookie[] cookies = request.getCookies();
@@ -27,18 +27,18 @@ if(userName == null) response.sendRedirect("login.html");
 %>
     <center style="color: #C71585;">
         <h1>Cars Management</h1>
-        <h2>
-            <a href="CarServlet"class="btn2"><i class="fa fa-car" aria-hidden="true"><i class="fa-solid fa-list"></i></i></a>
-        </h2>
+        <form action="CarServlet" align="center">
+            <input type="submit" class="btn" value="All"  >
+         </form>
     </center>
-    <div align="center">
+    <div align="center" onchange="toggleDiv(this.value)">
         <c:if test="${car != null}">
             <form action="CarServlet" method="post">
         </c:if>
         <c:if test="${car == null}">
             <form action="CarServlet" method="post">
         </c:if>
-        <table style="background-position: center;background-size:cover;" background="wallpaperflare.com_wallpaper.jpg"  border="1" cell-padding="2">
+        <table style="background-position: center;background-size:cover;" background="pics/wallpaperflare.com_wallpaper.jpg"  border="1" cell-padding="2">
             <caption>
                 <h2 style="color: #800000;">
                     <c:if test="${car != null}">
@@ -197,7 +197,6 @@ if(userName == null) response.sendRedirect("login.html");
                          </td>
                  </tr>
                  <tr>
-
                     <td colspan="5" align="center">
                         <input class="btn" type="submit" value = "Save" />
                         <input type="reset" class="btn1" value="Reset">
@@ -206,5 +205,14 @@ if(userName == null) response.sendRedirect("login.html");
         </table>
         </form>
     </div>
+    <script>
+        function toggleDiv(value){
+            //if no selection
+            if(value == ""){
+                alert("Please select an option");
+            }
+        }
+    </script>
 </body>
+
 </html>

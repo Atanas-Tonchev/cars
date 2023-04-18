@@ -9,7 +9,7 @@ crossorigin="anonymous" referrerpolicy="no-referrer" />
 <head>
 
 </head>
-<body>
+<body background="pics/wallpaperflare.com_wallpaper.jpg" style="background-size: auto;">
     <center>
         <h1>Registration successfully</h1>
     </center>

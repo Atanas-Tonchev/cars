@@ -27,8 +27,6 @@ public class LogInServlet extends HttpServlet {
             loginCookie.setMaxAge(15*60);
             resp.addCookie(loginCookie);
             resp.sendRedirect("welcome.jsp");
-            /*RequestDispatcher rd = req.getRequestDispatcher("welcome.jsp");
-            rd.forward(req, resp);*/
         } else {
             // user not registered.
             out.println("<font color=red>Either user name or password is wrong.</font>");

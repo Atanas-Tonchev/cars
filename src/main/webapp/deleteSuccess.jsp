@@ -10,7 +10,7 @@
     setTimeout('sample()', 5000);
 </script>
 </head>
-<body background="wallpaperflare.com_wallpaper.jpg" style="background-size: auto;">
+<body background="pics/wallpaperflare.com_wallpaper.jpg" style="background-size: auto;">
     <%
     String userName = null;
     Cookie[] cookies = request.getCookies();

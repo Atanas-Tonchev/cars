@@ -18,7 +18,10 @@ public class CarService implements CRUDServiceCars{
             throw new RuntimeException(e);
         }
     }
-
+    @Override
+    public List<String> getCarsMake() {
+        return CarStatements.allModels(connection);
+    }
 
     @Override
     public List<Car> getAllCars() {
@@ -31,15 +34,9 @@ public class CarService implements CRUDServiceCars{
     }
 
     @Override
-    public List<Car> getCarByYear(int fromYear, int toYear) {
-        return CarSearchStatements.carsByYear(connection,fromYear,toYear);
+    public List<Car> searchCarsByParam(String model, String yearFrom, String yearTo) {
+        return CarSearchStatements.carsByParam(connection,model,yearFrom,yearTo);
     }
-
-    @Override
-    public List<Car> getCarByMake(String make) {
-        return CarSearchStatements.carsByMake(connection,make);
-    }
-
 
     public boolean deleteCar(int carID){
         CarStatements.delete(carID, connection);

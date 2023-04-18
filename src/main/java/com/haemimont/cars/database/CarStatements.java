@@ -217,6 +217,30 @@ public class CarStatements {
         return result;
     }
 
+    public static List<String> allModels(Connection connection){
+        List<String> list = new ArrayList<>();
+
+        String sqlModels = "select distinct make from csv_cars_db.identification order by make";
+
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(sqlModels);
+
+            while (resultSet.next()) {
+                list.add(resultSet.getString("make"));
+
+            }
+            System.out.println("--correct find car by make");
+            statement.close();
+            return list;
+
+
+        } catch (SQLException e) {
+            System.out.println("--incorrect find car. " + e.getMessage());
+            throw new RuntimeException(e);
+
+        }
+    }
 
     public static List<Car> allCars(Connection connection) {
 

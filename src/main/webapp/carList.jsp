@@ -14,7 +14,7 @@ crossorigin="anonymous" referrerpolicy="no-referrer" />
         }
     </style>
 </head>
-<body background="wallpaperflare.com_wallpaper.jpg" style="background-size: auto;">
+<body background="pics/wallpaperflare.com_wallpaper.jpg" style="background-size: auto;">
 <%
 String userName = null;
 Cookie[] cookies = request.getCookies();
@@ -34,7 +34,6 @@ if(userName == null) response.sendRedirect("login.html");
             <center style="color: #B22222;">
                 <h1>WELCOME TO MY SERVER</h1>
             </center>
-            </table>
         </div>
         <form action="CarServlet" method="get" align="right">
                <a href="carForm.jsp" class="btn" >add new <i class="fa fa-car" aria-hidden="true"></i></a>
@@ -43,36 +42,14 @@ if(userName == null) response.sendRedirect("login.html");
     <section class="table_body">
 
         <div align="left">
-            <h2>Select by:</h2>
-            <form action = "SearchServlet" method="get">
-                <th>  Year from:
-                    <tr style="width:115px;height: 25px; " >
-                        <input type="text" name="yearF">
-                    </tr>
-                </th>
-                <th> to:
-                    <tr style="width:115px;height: 25px; " >
-                        <input type="text" name="yearT">
-                    </tr>
-                </th>
-                <input class="btn" type="submit" value = "search"
-                style=" width:100px; font-size: 16px; padding: 4px; background: #00FA9A;" />
-            </form>
-            <form action = "SearchServlet" method="post">
-               <th>  Model:
-                  <tr style="width:115px;height: 25px; " >
-                    <input type="text" name="model">
-                  </tr>
-               </th>
-                  <input class="btn" type="submit" value = "search"
-                  style=" width:100px; font-size: 16px; padding: 4px; background: #00FA9A;" />
-            </form>
+            <link rel="stylesheet" href="searchBtn.css" />
+            <a href="searchPage.jsp" class="btnSearch" >search</a>
         </div>
         <div align="center">
-            <table style="background-position: center;background-size:cover;" background="wallpaperflare.com_wallpaper.jpg" border="1" cell-padding="2" >
+            <table style="background-position: center;background-size:cover;"  border="1" cell-padding="2" >
                <h1>List of Cars</h1>
                     <tr
-                    style=" background: none; color: #000000; text-align: center; ">
+                    style=" background: #00fa9ac2; color: #000000; text-align: center; ">
                         <th>ID</th>
                         <th> Dimensions Height </th>
                         <th> Dimensions Length </th>
@@ -92,11 +69,12 @@ if(userName == null) response.sendRedirect("login.html");
                         <th> Make </th>
                         <th> Model & Year </th>
                         <th> Year </th>
+                        <th> View </th>
                         <th> Edit </th>
                         <th> Delete </th>
                     </tr>
                         <c:forEach var="car" items="${list}">
-                            <tr style=" background: none; color: #000000;">
+                            <tr style=" background: #fffff091; color: #000000;">
                                 <td><c:out value = '${car.id}' /></td>
                                 <td><c:out value = "${car.dimensions.height}" /></td>
                                 <td><c:out value = "${car.dimensions.length}" /></td>
@@ -116,12 +94,17 @@ if(userName == null) response.sendRedirect("login.html");
                                 <td><c:out value = "${car.identification.make}" /></td>
                                 <td><c:out value = "${car.identification.modelYear}" /></td>
                                 <td><c:out value = "${car.identification.year}" /></td>
-                                <td>
+                                <td style=" background: #55b5ffb4; color: #000000; text-align: center; ">
+                                    <a href="CarView?carId=<c:out value='${car.id}' />">
+                                        <center><i class="fa-regular fa-eye"></i></center>
+                                    </a>
+                                </td>
+                                <td style=" background: #d9f346b4; color: #000000; text-align: center; ">
                                     <a href="CarUpdate?carId=<c:out value='${car.id}' />">
                                     <center><i class="fa fa-pencil-square" aria-hidden="true"></i></center>
                                     </a>
                                 </td>
-                                <td>
+                                <td style=" background: #f5565eb5; color: #000000; text-align: center; ">
                                     <a href="CarDelete?carId=<c:out value='${car.id}' />" >
                                     <center><i class="fa fa-trash" aria-hidden="true"></i></center>
                                     </a>

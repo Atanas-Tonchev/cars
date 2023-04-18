@@ -1,10 +1,10 @@
 package com.haemimont.cars.model;
 
 public class Identification {
-    private final String Classification;
+    private String Classification;
     private String ID;
     private final String Make;
-    private final String ModelYear;
+    private String ModelYear;
     private int Year;
 
     public Identification(String classification, String ID, String make, String modelYear, int year) {
@@ -14,10 +14,9 @@ public class Identification {
         ModelYear = modelYear;
         Year = year;
     }
-    public Identification(String classification,String make,String modelYear) {
-        Classification = classification;
-        Make = make;
-        ModelYear = modelYear;
+
+    public Identification(String make) {
+       Make = make;
     }
 
     public String getClassification() {

@@ -13,7 +13,7 @@ crossorigin="anonymous" referrerpolicy="no-referrer" />
     <head>
         <title>Welcome</title>
     </head>
-    <body background="wallpaperflare.com_wallpaper.jpg" style="background-size: auto;">
+    <body background="pics/wallpaperflare.com_wallpaper.jpg" style="background-size: auto;">
     <%
     String userName = null;
     Cookie[] cookies = request.getCookies();
