@@ -1,5 +1,5 @@
 package com.haemimont.cars.servlet;
-import com.haemimont.cars.funny.JokesAppClient;
+import com.haemimont.cars.funny.JokeAppClient;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
@@ -7,7 +7,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-public class JokesServlet extends HttpServlet {
+public class JokeServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
@@ -16,7 +16,7 @@ public class JokesServlet extends HttpServlet {
             resp.getWriter().write(getJoke());
         } else {
             req.setAttribute("value", getJoke());
-            RequestDispatcher dispatcher = req.getRequestDispatcher("jokes.jsp");
+            RequestDispatcher dispatcher = req.getRequestDispatcher("joke.jsp");
             dispatcher.forward(req,resp);
         }
     }
@@ -29,7 +29,7 @@ public class JokesServlet extends HttpServlet {
     public String getJoke() {
         String result;
         try {
-            result = new JokesAppClient().syncGson();
+            result = new JokeAppClient().syncGson();
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

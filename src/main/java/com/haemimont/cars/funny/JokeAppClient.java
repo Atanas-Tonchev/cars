@@ -7,7 +7,7 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.util.List;
-public class JokesAppClient {
+public class JokeAppClient {
     Gson gson = new GsonBuilder().create();
     public String sampleApiRequest() throws Exception {
 
@@ -22,9 +22,9 @@ public class JokesAppClient {
     public String syncGson() throws Exception {
         String response = sampleApiRequest();
         String result = null;
-        List<Jokes> jokes = gson.fromJson(response, new TypeToken<List<Jokes>>() {
+        List<Joke> jokes = gson.fromJson(response, new TypeToken<List<Joke>>() {
         }.getType());
-        for (Jokes joke:jokes){
+        for (Joke joke:jokes){
             result = joke.getSetup()+ " - " +joke.getPunchline();
         }
 

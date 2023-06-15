@@ -2,7 +2,7 @@
 <web-app>
     <servlet>
         <servlet-name>jokes</servlet-name>
-        <servlet-class>com.haemimont.cars.servlet.JokesServlet</servlet-class>
+        <servlet-class>com.haemimont.cars.servlet.JokeServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>view</servlet-name>
