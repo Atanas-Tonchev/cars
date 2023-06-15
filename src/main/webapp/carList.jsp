@@ -29,6 +29,12 @@ if(userName == null) response.sendRedirect("login.html");
 <link rel="stylesheet" href="editBtn.css" />
           <input type="submit" class="btn1" value="Logout" >
 </form>
+<form action="JokesServlet" method="post">
+ <div align="right">
+    <link rel="stylesheet" href="searchBtn.css" />
+    <input type="submit" class="btnSearch" value="Jokes" >
+ </div>
+ </form>
     <div class="container">
         <div class="box">
             <center style="color: #B22222;">
@@ -39,12 +45,14 @@ if(userName == null) response.sendRedirect("login.html");
                <a href="carForm.jsp" class="btn" >add new <i class="fa fa-car" aria-hidden="true"></i></a>
         </form>
     </div>
+
     <section class="table_body">
 
         <div align="left">
             <link rel="stylesheet" href="searchBtn.css" />
             <a href="searchPage.jsp" class="btnSearch" >search</a>
         </div>
+
         <div align="center">
             <table style="background-position: center;background-size:cover;"  border="1" cell-padding="2" >
                <h1>List of Cars</h1>

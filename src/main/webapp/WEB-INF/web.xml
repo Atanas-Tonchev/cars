@@ -1,6 +1,9 @@
 <?xml version = "1.0" encoding = "UTF-8"?>
 <web-app>
-
+    <servlet>
+        <servlet-name>jokes</servlet-name>
+        <servlet-class>com.haemimont.cars.servlet.JokesServlet</servlet-class>
+    </servlet>
     <servlet>
         <servlet-name>view</servlet-name>
         <servlet-class>com.haemimont.cars.servlet.CarView</servlet-class>
@@ -37,7 +40,10 @@
         <servlet-name>view</servlet-name>
         <url-pattern>/CarView</url-pattern>
     </servlet-mapping>
-
+    <servlet-mapping>
+        <servlet-name>jokes</servlet-name>
+        <url-pattern>/JokesServlet</url-pattern>
+    </servlet-mapping>
     <servlet-mapping>
         <servlet-name>registration</servlet-name>
         <url-pattern>/Registration</url-pattern>

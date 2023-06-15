@@ -9,21 +9,15 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
-
-
 public class CarServlet extends HttpServlet {
-
     CRUDServiceCars crudService = new CarService();
-
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         List<Car> list = crudService.getAllCars();
         req.setAttribute("list", list);
         RequestDispatcher dispatcher = req.getRequestDispatcher("carList.jsp");
         dispatcher.forward(req,resp);
-
     }
-
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 

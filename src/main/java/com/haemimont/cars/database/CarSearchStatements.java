@@ -1,17 +1,12 @@
 package com.haemimont.cars.database;
-
 import com.haemimont.cars.model.*;
 import com.haemimont.cars.utils.SqlBuildingTest;
-
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 public class CarSearchStatements {
-
-
     public static List<Car> carsByParam(Connection connection, String make, String yearFrom, String yearTo) {
         List<Car> myList = new ArrayList<>();
         SqlBuildingTest sqlBuildingTest = new SqlBuildingTest();
@@ -19,43 +14,31 @@ public class CarSearchStatements {
         ResultSet resultSet;
         int paramIndexStatement = 1;
         Map<Integer, String> map = new HashMap<>();
-
-
         try {
-
-
             if (make != null && !make.equals("")) {
                 sqlBuildingTest.equalsParam("identification.make", make);
                 map.put(paramIndexStatement, make);
                 paramIndexStatement++;
             }
-
             if (yearFrom != null && !yearFrom.equals("")) {
                 sqlBuildingTest.greatherThanParam("identification.year", yearFrom);
                 map.put(paramIndexStatement, yearFrom);
                 paramIndexStatement++;
             }
-
             if (yearTo != null && !yearTo.equals("")) {
                 sqlBuildingTest.lessThanParam("identification.year", yearTo);
                 map.put(paramIndexStatement, yearTo);
-                paramIndexStatement++;
             }
-
-
+            
             statement = connection.prepareStatement(sqlBuildingTest.getSql());
 
             for (Map.Entry<Integer,String> entry : map.entrySet()){
-                Object value = entry.getValue();
-                if (value instanceof String) {
-                    statement.setString(entry.getKey(), (String) value);
-                } else if (value instanceof Integer) {
-                    statement.setInt(entry.getKey(), (Integer) value);
+                String value = entry.getValue();
+                if (value != null) {
+                    statement.setString(entry.getKey(), value);
                 }
             }
-
             resultSet = statement.executeQuery();
-
 
             while (resultSet.next()) {
                 int id = resultSet.getInt("car_id");
@@ -84,14 +67,11 @@ public class CarSearchStatements {
                 myList.add(car);
 
             }
-
             System.out.println("--correct find cars by param");
             statement.close();
 
-
         } catch (SQLException e) {
             System.out.println("--incorrect find cars by param. " + e.getMessage());
-
         }
         return myList;
     }

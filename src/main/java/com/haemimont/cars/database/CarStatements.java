@@ -3,32 +3,20 @@ import com.haemimont.cars.model.*;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-
-
 public class CarStatements {
-
-
     public static void insert(Car car, Connection connection) {
-
-
-
         String sqlCar = "INSERT INTO csv_cars_db.car (dimensions_dimensions_id," +
                 "fuel_information_fuel_information_id," +
                 "identification_identification_id," +
                 "engine_information_engine_information_id) " +
                 "VALUES(?,?,?,?)";
-
-
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sqlCar, PreparedStatement.RETURN_GENERATED_KEYS);
-
             preparedStatement.setInt(1, insertDimension(car.getDimensions(), connection));
             preparedStatement.setInt(2, insertFuelInformation(car.getFuelInformation(), connection));
             preparedStatement.setInt(3, insertIdentification(car.getIdentification(), connection));
             preparedStatement.setInt(4, insertEngineInformation(car.getEngineInformation(), connection));
-
             preparedStatement.executeUpdate();
-
             ResultSet resultSet = preparedStatement.getGeneratedKeys();
 
             if (resultSet.next()) {
