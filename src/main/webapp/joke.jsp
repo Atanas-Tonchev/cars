@@ -42,7 +42,7 @@
         }
         .success{
             position: relative;
-            background-color: #fff;
+            background-color: #C6C6C6;
             animation: bounce .3s ease-in;
         }
         @keyframes bounce{
@@ -79,6 +79,8 @@
 
 <script>
 function ajaxCall() {
+    $(this).addClass("active");
+    $(".button").addClass("success");
     $.ajax({
 			url : '#',
 			data : {
@@ -86,27 +88,11 @@ function ajaxCall() {
 			},
 			success : function(responseText) {
 				$('#value').text(responseText);
-			}
-
-		});   
-}
-</script>
-<script>
-     $(document).ready(function(){
-        $(".button").click(function(){
-            $(this).addClass("active");
-
-            setTimeout(function(){
-                $(".button").addClass("success");
-
-            },1000);
-            setTimeout(function(){
                 $(".button").removeClass("active");
                 $(".button").removeClass("success");
-            },1000);
-        });
-    });
+			}
+		});
+}
 </script>
-
 </body>
 </html>
