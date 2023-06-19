@@ -1,7 +1,7 @@
 package com.haemimont.cars.api;
 import java.util.List;
 
-public class MyApi {
+public class RequestForm {
     private String username;
     private final String password;
     private final String email;
@@ -9,7 +9,7 @@ public class MyApi {
     String accessToken;
     String tokenType;
 
-    public MyApi(String username, String password, String email, List<String> role) {
+    public RequestForm(String username, String password, String email, List<String> role) {
         this.username = username;
         this.password = password;
         this.email = email;

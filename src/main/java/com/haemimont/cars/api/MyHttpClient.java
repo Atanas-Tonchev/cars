@@ -24,7 +24,7 @@ public class MyHttpClient {
         return client.send(request, HttpResponse.BodyHandlers.ofString());
     }
 
-    public HttpResponse<String> newRegistration(MyApi myApi) throws Exception {
+    public HttpResponse<String> newRegistration(RequestForm myApi) throws Exception {
         JSONObject jo = new JSONObject();
         jo.put("username",myApi.getUsername());
         jo.put("email",myApi.getEmail());
@@ -41,7 +41,7 @@ public class MyHttpClient {
         return client.send(request,HttpResponse.BodyHandlers.ofString());
     }
 
-    public HttpResponse<String> login(MyApi myApi) throws Exception {
+    public HttpResponse<String> login(RequestForm myApi) throws Exception {
         JSONObject jo = new JSONObject();
         jo.put("username",myApi.getUsername());
         jo.put("password" , myApi.getPassword());
@@ -56,7 +56,7 @@ public class MyHttpClient {
         return client.send(request,HttpResponse.BodyHandlers.ofString());
     }
 
-    public HttpResponse<String> authTestUser(MyApi myApi) throws Exception {
+    public HttpResponse<String> authTestUser(RequestForm myApi) throws Exception {
         HttpClient client = HttpClient.newHttpClient();
         String testUser = "/test/user";
         HttpRequest request = HttpRequest.newBuilder()
@@ -68,7 +68,7 @@ public class MyHttpClient {
         return client.send(request,HttpResponse.BodyHandlers.ofString());
     }
 
-    public HttpResponse<String> authTestAdmin(MyApi myApi) throws Exception {
+    public HttpResponse<String> authTestAdmin(RequestForm myApi) throws Exception {
         HttpClient client = HttpClient.newHttpClient();
         String testAdmin = "/test/admin";
         HttpRequest request = HttpRequest.newBuilder()
@@ -80,7 +80,7 @@ public class MyHttpClient {
         return client.send(request,HttpResponse.BodyHandlers.ofString());
     }
 
-    public HttpResponse<String> authTestModerator(MyApi myApi) throws Exception {
+    public HttpResponse<String> authTestModerator(RequestForm myApi) throws Exception {
         HttpClient client = HttpClient.newHttpClient();
         String testModerator = "/test/mod";
         HttpRequest request = HttpRequest.newBuilder()
@@ -92,13 +92,13 @@ public class MyHttpClient {
         return client.send(request,HttpResponse.BodyHandlers.ofString());
     }
 
-    public String getAuthorizationValue(MyApi myApi) throws Exception {
+    public String getAuthorizationValue(RequestForm myApi) throws Exception {
         String[] strArr = new String[] {login(myApi).body()};
         String response = Arrays.toString(strArr);
         String authorizeValue = null;
-        List<MyApi> myApisList = gson.fromJson(response, new TypeToken<List<MyApi>>() {
+        List<RequestForm> myApisList = gson.fromJson(response, new TypeToken<List<RequestForm>>() {
         }.getType());
-        for (MyApi api : myApisList){
+        for (RequestForm api : myApisList){
             authorizeValue = api.getTokenType()+ " " +api.getAccessToken();
         }
 
