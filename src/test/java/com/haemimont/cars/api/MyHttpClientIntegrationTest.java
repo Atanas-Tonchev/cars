@@ -1,23 +1,35 @@
 package com.haemimont.cars.api;
 import org.apache.http.HttpStatus;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.Test;
-import java.util.ArrayList;
-import java.util.List;
+
+import java.net.URISyntaxException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class MyHttpClientIntegrationTest {
     MyHttpClient myHttpClient = new MyHttpClient();
+    private static Logger logger = LogManager.getLogger(MyHttpClientIntegrationTest.class);
+
+    MyHttpClientIntegrationTest() throws URISyntaxException {
+    }
+
     @Test
-      public void ifConnSuccess_MakeNewReg_Login_Auth() throws Exception {
+      public void whenConnSuccessMakeNewRegThanLoginAndCheckAuth() throws Exception {
         int statusSuccess = HttpStatus.SC_OK;
-        List<String> role = new ArrayList<>();
-        role.add("admin");
-        role.add("user");
-        role.add("mod");
-        RequestForm requestForm = new RequestForm("Atanas131212431","12222223625143423","rvababagklasV@example.com",role);
+        String username = "atanas0112";
+        String pass = "112345";
+        String email = "rrs3hf2@example.com";
+        ApiRole apiRole = new ApiRole();
+        apiRole.setUser("user");
+        apiRole.setModerator("mod");
+        ApiRequestForm requestForm = new ApiRequestForm(new ApiRegistration(username,pass,email,
+                new ApiRole().getRole()),
+                new ApiLogin(username,pass),
+                new ApiAuthorization());
         if(statusSuccess!=myHttpClient.testAll().statusCode()){
-            System.out.println("Connection field!");
+            logger.error("Connection field! Please try again!");
         }
         if(statusSuccess==myHttpClient.testAll().statusCode()){
             statusSuccess = myHttpClient.newRegistration(requestForm).statusCode();
@@ -32,7 +44,7 @@ class MyHttpClientIntegrationTest {
             assertEquals(200,statusSuccess);
         }
         if(statusSuccess==HttpStatus.SC_OK){
-            System.out.println("Integration test complete success!");
+            logger.info("Integration test complete success!");
         }
     }
 }
