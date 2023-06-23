@@ -7,13 +7,13 @@ public class ApiRegistration {
     private String username;
     private String password;
     private String email;
-    List<String> role;
+    private List<String> userRoles;
 
-    public ApiRegistration(String username, String password, String email, List<String> role) {
+    public ApiRegistration(String username, String password, String email, List<String> userRoles) {
         this.username = username;
         this.password = password;
         this.email = email;
-        this.role = role;
+        this.userRoles = userRoles;
     }
 
     public String getUsername() {
@@ -36,8 +36,8 @@ public class ApiRegistration {
         return email;
     }
 
-    public List<String> getRole() {
-        return role;
+    public List<String> getRoles() {
+        return userRoles;
     }
 
 }

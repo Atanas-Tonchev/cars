@@ -15,6 +15,7 @@ public class MyHttpClient {
     ApiUriConfiguration myApiUri = new ApiUriConfiguration();
     Gson gson = new GsonBuilder().create();
 
+
     public HttpResponse<String> testAll() throws Exception {
         HttpClient client = HttpClient.newHttpClient();
         HttpRequest request = HttpRequest.newBuilder()
@@ -24,12 +25,12 @@ public class MyHttpClient {
         return client.send(request, HttpResponse.BodyHandlers.ofString());
     }
 
-    public HttpResponse<String> newRegistration(ApiRequestForm myApi) throws Exception {
+    public HttpResponse<String> newRegistration(ApiObjectUtil myApi) throws Exception {
         JSONObject jo = new JSONObject();
         jo.put("username",myApi.singUp.getUsername());
         jo.put("email",myApi.singUp.getEmail());
         jo.put("password" , myApi.singUp.getPassword());
-        jo.put("role",myApi.singUp.getRole());
+        jo.put("role",myApi.singUp.getRoles());
         HttpClient client = HttpClient.newHttpClient();
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(new URI(myApiUri.getSignupUri()))
@@ -40,7 +41,7 @@ public class MyHttpClient {
         return client.send(request,HttpResponse.BodyHandlers.ofString());
     }
 
-    public HttpResponse<String> login(ApiRequestForm myApi) throws Exception {
+    public HttpResponse<String> login(ApiObjectUtil myApi) throws Exception {
         JSONObject jo = new JSONObject();
         jo.put("username",myApi.singIn.getUsername());
         jo.put("password" , myApi.singIn.getPassword());
@@ -54,18 +55,22 @@ public class MyHttpClient {
         return client.send(request,HttpResponse.BodyHandlers.ofString());
     }
 
-    public HttpResponse<String> authTestUser(ApiRequestForm myApi) throws Exception {
+    public HttpResponse<String> authTestUser(ApiObjectUtil myApi) throws Exception {
+        String result = getAuthorizationValue(myApi);
         HttpClient client = HttpClient.newHttpClient();
         HttpRequest request = HttpRequest.newBuilder()
                 .GET()
                 .uri(new URI(myApiUri.getTestUserAuthUri()))
-                .header("Authorization", getAuthorizationValue(myApi))
+                .header("Authorization", result)
                 .build();
 
         return client.send(request,HttpResponse.BodyHandlers.ofString());
     }
 
-    public HttpResponse<String> authTestAdmin(ApiRequestForm myApi) throws Exception {
+
+
+    public HttpResponse<String> authTestAdmin(ApiObjectUtil myApi) throws Exception {
+
         HttpClient client = HttpClient.newHttpClient();
         HttpRequest request = HttpRequest.newBuilder()
                 .GET()
@@ -76,7 +81,7 @@ public class MyHttpClient {
         return client.send(request,HttpResponse.BodyHandlers.ofString());
     }
 
-    public HttpResponse<String> authTestModerator(ApiRequestForm myApi) throws Exception {
+    public HttpResponse<String> authTestModerator(ApiObjectUtil myApi) throws Exception {
         HttpClient client = HttpClient.newHttpClient();
         HttpRequest request = HttpRequest.newBuilder()
                 .GET()
@@ -87,17 +92,18 @@ public class MyHttpClient {
         return client.send(request,HttpResponse.BodyHandlers.ofString());
     }
 
-    public String getAuthorizationValue(ApiRequestForm myApi) throws Exception {
+    public String getAuthorizationValue(ApiObjectUtil myApi) throws Exception {
         String[] strArr = new String[] {login(myApi).body()};
         String response = Arrays.toString(strArr);
-        String authorizeValue = null;
+        String result = null;
+
         List<ApiAuthorization> myApisList = gson.fromJson(response, new TypeToken<List<ApiAuthorization>>() {
         }.getType());
         for (ApiAuthorization api : myApisList){
-            authorizeValue = api.getTokenType() + " " + api.getAccessToken();
+            result = api.tokenType+ " " +api.accessToken;
         }
 
-        return authorizeValue;
+        return result;
     }
 
 }

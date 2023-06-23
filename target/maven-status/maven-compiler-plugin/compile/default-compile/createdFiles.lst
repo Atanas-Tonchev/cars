@@ -1,4 +1,5 @@
 com\haemimont\cars\database\CarStatements.class
+com\haemimont\cars\api\UserRole.class
 com\haemimont\cars\database\DataBaseUtil.class
 com\haemimont\cars\database\DataBase.class
 com\haemimont\cars\database\MyDataBase.class
