@@ -10,7 +10,7 @@ public class Main {
     private static final Logger logger = LogManager.getLogger(Main.class);
     public static void main(String[] args) {
         String username = "Atanas1990";
-        String pass = "betimoni22";
+        String pass = "betimoni2215";
         String email = "rrrsgkls3hf2@example.com";
         List<String> userRoles = new ArrayList<>();
         userRoles.add(UserRole.MODERATOR);
@@ -32,7 +32,10 @@ public class Main {
 
         */
         try {
-            //logger.info(new MyHttpClient().authTestUser(req).body());
+            logger.info(new MyHttpClient().login(req).body());
+            logger.info(new MyHttpClient().authTestUser().body());
+            logger.info(new MyHttpClient().authTestModerator().body());
+
 
             //logger.info(new MyHttpClient().login(req).body());
             //logger.info(new LoginMessages().getErrorLoginMessageUnauthorized());
