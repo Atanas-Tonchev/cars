@@ -4,19 +4,19 @@ import org.json.JSONObject;
 
 public class ApiResponseMessages {
 
-    protected JSONObject getSuccessRegMessage(){
+    public JSONObject getSuccessRegMessage(){
         JSONObject jo = new JSONObject();
         jo.put("message","User registered successfully!");
         return jo;
     }
 
-    protected JSONObject getErrorRegMessageAlreadyTaken(){
+    public JSONObject getErrorRegMessageAlreadyTaken(){
         JSONObject jo = new JSONObject();
         jo.put("message","Error: Username is already taken!");
         return jo;
     }
 
-    protected JSONObject getErrorRegMessageUnauthorized(){
+    public JSONObject getErrorRegMessageUnauthorized(){
         int statusCode = HttpStatus.SC_UNAUTHORIZED;
         JSONObject jo = new JSONObject();
         jo.put("path","/error");
@@ -26,7 +26,7 @@ public class ApiResponseMessages {
         return jo;
     }
 
-    protected JSONObject getErrorLoginMessageUnauthorized(){
+    public JSONObject getErrorLoginMessageUnauthorized(){
         int statusCode = HttpStatus.SC_UNAUTHORIZED;
         JSONObject jo = new JSONObject();
         jo.put("path","/api/auth/signin");
@@ -35,16 +35,16 @@ public class ApiResponseMessages {
         jo.put("status",statusCode);
         return jo;
     }
-    protected String getSuccessAuthUserMessage(){
+    public String getSuccessAuthUserMessage(){
         return "User Content.";
     }
-    protected String getSuccessAuthModMessage(){
+    public String getSuccessAuthModMessage(){
         return "Moderator Board.";
     }
-    protected String getSuccessAuthAdminMessage(){
+    public String getSuccessAuthAdminMessage(){
         return "Admin Board.";
     }
-    protected JSONObject getErrorAuthMessageUnauthorized(){
+    public JSONObject getErrorAuthMessageUnauthorized(){
         int statusCode = HttpStatus.SC_UNAUTHORIZED;
         JSONObject jo = new JSONObject();
         jo.put("path","/error");

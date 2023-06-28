@@ -2,7 +2,6 @@ package com.haemimont.cars.api;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 public class MyHttpClientUnitTest {
@@ -15,6 +14,5 @@ public class MyHttpClientUnitTest {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-
     }
 }

@@ -35,6 +35,12 @@ if(userName == null) response.sendRedirect("login.html");
     <input type="submit" class="btnSearch" value="Jokes" >
  </div>
  </form>
+ <form action="UnitTestConnectionServlet" method="post">
+  <div align="right">
+     <link rel="stylesheet" href="searchBtn.css" />
+     <a href="apiTests.jsp" class="btn">MY TESTS</a>
+  </div>
+  </form>
     <div class="container">
         <div class="box">
             <center style="color: #B22222;">

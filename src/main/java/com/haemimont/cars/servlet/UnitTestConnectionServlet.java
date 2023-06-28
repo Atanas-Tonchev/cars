@@ -1,5 +1,5 @@
 package com.haemimont.cars.servlet;
-import com.haemimont.cars.funny.JokeAppClient;
+import com.haemimont.cars.tests.TestApiConnection;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
@@ -7,16 +7,18 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-public class JokeServlet extends HttpServlet {
+public class UnitTestConnectionServlet extends HttpServlet {
+    TestApiConnection testApiConnection = new TestApiConnection();
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        if (req.getParameter("refresh") != null && req.getParameter("refresh").equals("true")) {
+        if (req.getParameter("test") != null && req.getParameter("test").equals("true")) {
             resp.setContentType("text/plain");
-            resp.getWriter().write(getJoke());
+            resp.getWriter().write(testApiConnection.getConnectionTest());
         } else {
-            req.setAttribute("value", getJoke());
-            RequestDispatcher dispatcher = req.getRequestDispatcher("joke.jsp");
+            req.setAttribute("test", testApiConnection.getConnectionTest());
+            RequestDispatcher dispatcher = req.getRequestDispatcher("testConnectionResult.jsp");
             dispatcher.forward(req,resp);
         }
     }
@@ -24,16 +26,5 @@ public class JokeServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         doGet(req,resp);
-    }
-
-    public String getJoke() {
-        String result;
-        try {
-            result = new JokeAppClient().syncGson();
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-
-        return result;
     }
 }

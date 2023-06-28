@@ -1,8 +1,16 @@
 <?xml version = "1.0" encoding = "UTF-8"?>
 <web-app>
     <servlet>
+        <servlet-name>integrationTestMessages</servlet-name>
+        <servlet-class>com.haemimont.cars.servlet.IntegrationTestMessagesServlet</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>jokes</servlet-name>
         <servlet-class>com.haemimont.cars.servlet.JokeServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>unitTestConn</servlet-name>
+        <servlet-class>com.haemimont.cars.servlet.UnitTestConnectionServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>view</servlet-name>
@@ -36,6 +44,14 @@
         <servlet-name>logout</servlet-name>
         <servlet-class>com.haemimont.cars.servlet.LogOutServlet</servlet-class>
     </servlet>
+    <servlet-mapping>
+        <servlet-name>integrationTestMessages</servlet-name>
+        <url-pattern>/IntegrationTestMessagesServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>unitTestConn</servlet-name>
+        <url-pattern>/UnitTestConnectionServlet</url-pattern>
+    </servlet-mapping>
     <servlet-mapping>
         <servlet-name>view</servlet-name>
         <url-pattern>/CarView</url-pattern>
