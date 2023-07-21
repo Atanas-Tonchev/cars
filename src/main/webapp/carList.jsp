@@ -38,7 +38,7 @@ if(userName == null) response.sendRedirect("login.html");
  <form action="UnitTestConnectionServlet" method="post">
   <div align="right">
      <link rel="stylesheet" href="searchBtn.css" />
-     <a href="apiTests.jsp" class="btn">MY TESTS</a>
+     <a href="apiTests.jsp" class="btn">API TESTS</a>
   </div>
   </form>
     <div class="container">

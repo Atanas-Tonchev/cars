@@ -5,6 +5,14 @@
         <servlet-class>com.haemimont.cars.servlet.IntegrationTestMessagesServlet</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>loggFile</servlet-name>
+        <servlet-class>com.haemimont.cars.servlet.LoggerFileJarServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>jarExecutor</servlet-name>
+        <servlet-class>com.haemimont.cars.servlet.JarExecutorServletTestApi</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>jokes</servlet-name>
         <servlet-class>com.haemimont.cars.servlet.JokeServlet</servlet-class>
     </servlet>
@@ -44,6 +52,14 @@
         <servlet-name>logout</servlet-name>
         <servlet-class>com.haemimont.cars.servlet.LogOutServlet</servlet-class>
     </servlet>
+    <servlet-mapping>
+        <servlet-name>jarExecutor</servlet-name>
+        <url-pattern>/JarExecutorServletTestApi</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>loggFile</servlet-name>
+        <url-pattern>/LoggerFileJarServlet</url-pattern>
+    </servlet-mapping>
     <servlet-mapping>
         <servlet-name>integrationTestMessages</servlet-name>
         <url-pattern>/IntegrationTestMessagesServlet</url-pattern>

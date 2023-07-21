@@ -1,16 +1,12 @@
 package com.haemimont.cars.servlet;
-import com.haemimont.cars.api.ApiAuthorization;
-import com.haemimont.cars.api.ApiLogin;
-import com.haemimont.cars.api.ApiObjectUtil;
-import com.haemimont.cars.api.ApiRegistration;
-import com.haemimont.cars.tests.ApiReceivingMessages;
-import com.haemimont.cars.tests.TestApiConnRegLoginAuth;
+import com.haemimont.cars.api.*;
+import com.haemimont.cars.tests.IntegrationTestApi;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.apache.http.HttpStatus;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -20,37 +16,65 @@ public class IntegrationTestMessagesServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        TestApiConnRegLoginAuth test = new TestApiConnRegLoginAuth();
-        ApiReceivingMessages receivingMessages = new ApiReceivingMessages();
+
         resp.setContentType("text/html");
         PrintWriter out = resp.getWriter();
-        String user = req.getParameter("name");
-        String password = req.getParameter("password");
-        String email = req.getParameter("email");
-        List<String> userRoles = new ArrayList<>();
-        userRoles.add(req.getParameter("userType").toLowerCase());
-        ApiObjectUtil api = new ApiObjectUtil(new ApiRegistration(user, password, email, userRoles),
-                new ApiLogin(user, password), new ApiAuthorization());
+        String username = req.getParameter("Username");
 
-        try {
-            if (test.whenConnSuccessMakeSingUpSingInCheckAuth(api)==200) {
-                // user found.
-                List<String> list = receivingMessages.getMap();
-                req.setAttribute("list", list);
-                RequestDispatcher dispatcher = req.getRequestDispatcher("resultTestMessages.jsp");
-                dispatcher.forward(req,resp);
-                Cookie loginCookie = new Cookie("username1",user);
-                loginCookie.setMaxAge(15*60);
-                resp.addCookie(loginCookie);
-                resp.sendRedirect("resultTestMessages.jsp");
-            } else {
-                // user not registered.
-                out.println("<font color=red>Either user name or password is wrong.</font>");
-                RequestDispatcher rd = getServletContext().getRequestDispatcher("processInputApiTestMessages.jsp");
-                rd.include(req, resp);
+        String password = req.getParameter("Password");
+        String email = req.getParameter("Email");
+        String role = req.getParameter("userTypes");
+        List<String> userRoles = new ArrayList<>();
+        if (role!=null){
+            userRoles.add(role.toLowerCase());
+        }
+        ApiObjectUtil api = new ApiObjectUtil(new ApiRegistration(username, password, email, userRoles),
+                new ApiLogin(username, password), new ApiAuthorization());
+
+        if(username.equals("") && password.equals("")){
+            out.println("<font color=red><h1>Please insert username and password for login,</h1></font>"+
+                    "<br><font color=red><h1>and username,password,email and role/roles for new registration!</h1></font></br>"+
+                    "<br><h1><a href='apiTests.jsp'>Try again</a></h1></br>");
+            RequestDispatcher rd = getServletContext().getRequestDispatcher("apiTests.jsp");
+            rd.include(req, resp);
+        }else {
+            if (role != null && email != null) {
+                try {
+                    if (new IntegrationTestApi().whenConnSuccessMakeSingUpSingInCheckAuth(api) == HttpStatus.SC_OK) {
+                        // user found.
+                        List<String> list = SingletonLoggerFile.getLoggFile("logger.log");
+                        req.setAttribute("list", list);
+                        RequestDispatcher dispatcher = req.getRequestDispatcher("apiTests.jsp");
+                        dispatcher.forward(req, resp);
+                        resp.sendRedirect("apiTests.jsp");
+                    } else {
+                        // user not registered.
+                        out.println("<font color=red>Either user name or password is wrong.</font>");
+                        RequestDispatcher rd = getServletContext().getRequestDispatcher("apiTests.jsp");
+                        rd.include(req, resp);
+                    }
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
+            }else {
+                try {
+                    if (new IntegrationTestApi().whenConnSuccessMakeSingUpSingInCheckAuth(api) == HttpStatus.SC_OK) {
+                        // user found.
+                        List<String> list = SingletonLoggerFile.getLoggFile("logger.log");
+                        req.setAttribute("list", list);
+                        RequestDispatcher dispatcher = req.getRequestDispatcher("apiTests.jsp");
+                        dispatcher.forward(req, resp);
+                        resp.sendRedirect("apiTests.jsp");
+                    } else {
+                        // user not registered.
+                        out.println("<font color=red>Either user name or password is wrong.</font>");
+                        RequestDispatcher rd = getServletContext().getRequestDispatcher("apiTests.jsp");
+                        rd.include(req, resp);
+                    }
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
             }
-        } catch (Exception e) {
-            throw new RuntimeException(e);
         }
 
     }
@@ -59,5 +83,6 @@ public class IntegrationTestMessagesServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         doGet(req, resp);
     }
+
 }
 
