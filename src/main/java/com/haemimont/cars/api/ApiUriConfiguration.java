@@ -1,6 +1,4 @@
 package com.haemimont.cars.api;
-import java.net.URI;
-import java.net.URISyntaxException;
 
 public enum ApiUriConfiguration {
     ;

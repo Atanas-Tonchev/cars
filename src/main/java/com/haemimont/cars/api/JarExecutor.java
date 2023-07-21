@@ -9,7 +9,6 @@ public class JarExecutor {
     private static final Logger logger = LogManager.getLogger(JarExecutor.class);
     private static String result;
 
-
     public static List<String> startExtJarProgram() {
         List<String> resultList = new ArrayList<>();
         String[] commands = {"java", "-jar", "cars.jar"};

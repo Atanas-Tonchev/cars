@@ -1,7 +1,6 @@
 package com.haemimont.cars.api;
 import org.apache.http.HttpStatus;
 import org.json.JSONObject;
-
 public class ApiResponseMessages {
 
     public JSONObject getSuccessRegMessage(){

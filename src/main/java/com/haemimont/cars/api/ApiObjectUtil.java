@@ -1,5 +1,4 @@
 package com.haemimont.cars.api;
-
 public class ApiObjectUtil {
     ApiRegistration singUp;
     ApiLogin singIn;

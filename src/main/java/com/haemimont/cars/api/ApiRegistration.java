@@ -1,13 +1,10 @@
 package com.haemimont.cars.api;
-
-
 import java.util.List;
-
 public class ApiRegistration {
     private String username;
     private String password;
-    private String email;
-    private List<String> userRoles;
+    private final String email;
+    private final List<String> userRoles;
 
     public ApiRegistration(String username, String password, String email, List<String> userRoles) {
         this.username = username;

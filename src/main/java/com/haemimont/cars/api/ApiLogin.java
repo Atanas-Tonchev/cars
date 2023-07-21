@@ -1,9 +1,7 @@
 package com.haemimont.cars.api;
-
 public class ApiLogin {
-    private String username;
-    private String password;
-
+    private final String username;
+    private final String password;
 
     public ApiLogin(String username, String password) {
         this.username = username;

@@ -288,7 +288,7 @@ public class MultiThreadTest {
 
         MultiThreadTest test = new MultiThreadTest();
         test.getThreadTestApiInnerLock(req);
-        //test.getThreadTestApi(req);
+        test.getThreadTestApi(req);
 
     }
 }

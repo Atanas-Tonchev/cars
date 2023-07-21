@@ -8,7 +8,6 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.util.*;
-
 public class MyHttpClient {
     private final HttpClient httpClient = HttpClient.newHttpClient();
     Gson gson = new GsonBuilder().create();
@@ -59,7 +58,6 @@ public class MyHttpClient {
                 .header("Authorization", authValue)
                 .build(), HttpResponse.BodyHandlers.ofString());
     }
-
 
     public HttpResponse<String> authTestAdmin() throws Exception {
 
