@@ -9,7 +9,7 @@
     <title>Welcome to my tests</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <style>
-        .button{
+        .button1 {
             display: inline-block;
             width: 220px;
             height: 60px;
@@ -28,78 +28,42 @@
             transition: all ease 0.5s;
         }
         .button2 {
-                    display: inline-block;
-                    width: 220px;
-                    height: 60px;
-                    border: 2px solid black;
-                    color: black;
-                    font-size: auto;
-                    font-weight: bold;
-                    text-transform: uppercase;
-                    text-align: center;
-                    text-decoration: none;
-                    line-height: 56px;
-                    box-sizing: border-box;
-                    border-radius: 50px;
-                    background-color: #57F2D5;
-                    outline: none;
-                    transition: all ease 0.5s;
-                }
+            display: inline-block;
+            width: 220px;
+            height: 60px;
+            border: 2px solid black;
+            color: black;
+            font-size: auto;
+            font-weight: bold;
+            text-transform: uppercase;
+            text-align: center;
+            text-decoration: none;
+            line-height: 56px;
+            box-sizing: border-box;
+            border-radius: 50px;
+            background-color: #57F2D5;
+            outline: none;
+            transition: all ease 0.5s;
+        }
         .button3 {
-                    display: inline-block;
-                    width: 220px;
-                    height: 60px;
-                    border: 2px solid black;
-                    color: black;
-                    font-size: auto;
-                    font-weight: bold;
-                    text-transform: uppercase;
-                    text-align: center;
-                    text-decoration: none;
-                    line-height: 56px;
-                    box-sizing: border-box;
-                    border-radius: 50px;
-                    background-color: #57F2D5;
-                    outline: none;
-                    transition: all ease 0.5s;
+            display: inline-block;
+            width: 220px;
+            height: 60px;
+            border: 2px solid black;
+            color: black;
+            font-size: auto;
+            font-weight: bold;
+            text-transform: uppercase;
+            text-align: center;
+            text-decoration: none;
+            line-height: 56px;
+            box-sizing: border-box;
+            border-radius: 50px;
+            background-color: #57F2D5;
+            outline: none;
+            transition: all ease 0.5s;
         }
-        .button4 {
-                    display: inline-block;
-                    width: 220px;
-                    height: 60px;
-                    border: 2px solid black;
-                    color: black;
-                    font-size: auto;
-                    font-weight: bold;
-                    text-transform: uppercase;
-                    text-align: center;
-                    text-decoration: none;
-                    line-height: 56px;
-                    box-sizing: border-box;
-                    border-radius: 50px;
-                    background-color: #57F2D5;
-                    outline: none;
-                    transition: all ease 0.5s;
-        }
-        .button5 {
-                    display: inline-block;
-                    width: 220px;
-                    height: 60px;
-                    border: 2px solid black;
-                    color: black;
-                    font-size: auto;
-                    font-weight: bold;
-                    text-transform: uppercase;
-                    text-align: center;
-                    text-decoration: none;
-                    line-height: 56px;
-                    box-sizing: border-box;
-                    border-radius: 50px;
-                    background-color: #57F2D5;
-                    outline: none;
-                    transition: all ease 0.5s;
-        }
-        .active{
+        .active {
             font-size: 0;
             width: 50px;
             height: 50px;
@@ -107,12 +71,12 @@
             border-left-color: transparent;
             animation: rotate 1.4s ease 0.5s infinite;
         }
-        @keyframes rotate{
+        @keyframes rotate {
             0%{
                 transform: rotate(360deg);
             }
         }
-        .success{
+        .success {
             position: relative;
             background-color: #C6C6C6;
             animation: bounce .3s ease-in;
@@ -257,14 +221,14 @@
 </form>      
 <table>
     <td>
-        <form action="UnitTestConnectionServlet" method="post">
-            <button class="button" onclick="ajaxCall()">Unit Test Connection</button>
+        <form action="UnitTestConnectionServlet" method="get">
+            <button class="button1" onclick="ajaxCall()">Unit Test Connection</button>
         </form>
     </td>
     <td>
         <form action="JarExecutorServletTestApi" method="GET">
             <div>
-                <button class="button5" onclick="reload()">run jar executor</button>   
+                <button class="button3" onclick="reload()">run jar executor</button>   
             </div>     
         </form>
     </td> 
@@ -292,9 +256,9 @@
     </form> 
 </div>
 <div>
-    <form action="UnitTestConnectionServlet" method="GET">
-        <c:forEach var="logg" items="${test}">
-           <h3><c:out value="${logg}"/></h3>
+    <form action="UnitTestConnectionServlet" method="post">
+        <c:forEach var="loggApi" items="${loggApi}">
+           <h3><c:out value="${loggApi}"/></h3>
         </c:forEach>
     </form>
 </div>
@@ -314,15 +278,11 @@
 <script>
 function ajaxCall() {
     $(this).addClass("active");
-    $(".button").addClass("success");
+    $(".button1").addClass("success");
     }
 function ajaxCall2() {
     $(this).addClass("active");
     $(".button2").addClass("success");
-    }
-function ajaxCall3() {
-    $(this).addClass("active");
-    $(".button3").addClass("success");
     }
 function refresh() {
     $(this).addClass("active");
@@ -342,7 +302,7 @@ function refresh() {
     }
     function reload() {
         $(this).addClass("active");
-        $(".button5").addClass("success");
+        $(".button3").addClass("success");
         refresh().block;
         $.ajax({
     			url : 'JarExecutorServletTestApi',
@@ -351,8 +311,8 @@ function refresh() {
     			},
     			success : function(responseText) {
     				$('#jar').text(responseText);
-                    $(".button5").removeClass("active");
-                    $(".button5").removeClass("success");
+                    $(".button3").removeClass("active");
+                    $(".button3").removeClass("success");
 
     			}
     		});

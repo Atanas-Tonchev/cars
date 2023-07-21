@@ -11,7 +11,7 @@ public class UnitTestApi {
     ApiResponseMessages messages = new ApiResponseMessages();
     private static final int success = HttpStatus.SC_OK;
 
-    public void getConnectionTest() {
+    public int getConnectionTest() {
         int result;
         try {
             result = new MyHttpClient().testAll().statusCode();
@@ -23,6 +23,7 @@ public class UnitTestApi {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+        return result;
     }
 
     public void connectionThread() throws InterruptedException {

@@ -41,7 +41,7 @@ public class IntegrationTestMessagesServlet extends HttpServlet {
                 try {
                     if (new IntegrationTestApi().whenConnSuccessMakeSingUpSingInCheckAuth(api) == HttpStatus.SC_OK) {
                         // user found.
-                        List<String> list = SingletonLoggerFile.getLoggFile("logger.log");
+                        List<String> list = LoggerFile.getLoggApiFile();
                         req.setAttribute("list", list);
                         RequestDispatcher dispatcher = req.getRequestDispatcher("apiTests.jsp");
                         dispatcher.forward(req, resp);
@@ -59,7 +59,7 @@ public class IntegrationTestMessagesServlet extends HttpServlet {
                 try {
                     if (new IntegrationTestApi().whenConnSuccessMakeSingUpSingInCheckAuth(api) == HttpStatus.SC_OK) {
                         // user found.
-                        List<String> list = SingletonLoggerFile.getLoggFile("logger.log");
+                        List<String> list = LoggerFile.getLoggApiFile();
                         req.setAttribute("list", list);
                         RequestDispatcher dispatcher = req.getRequestDispatcher("apiTests.jsp");
                         dispatcher.forward(req, resp);

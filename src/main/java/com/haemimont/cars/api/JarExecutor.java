@@ -13,8 +13,8 @@ public class JarExecutor {
         List<String> resultList = new ArrayList<>();
         String[] commands = {"java", "-jar", "cars.jar"};
         ProcessBuilder pb = new ProcessBuilder(commands);
-        File selectedFile = new File(LoggerAndJarExecutorConfiguration.PATH_JAR_FILE);
-        pb.redirectError(new File(Paths.get(LoggerAndJarExecutorConfiguration.PATH_JAR_ERROR_FILE).toUri()));
+        File selectedFile = new File(ApiPathConfiguration.PATH_JAR_FILE);
+        pb.redirectError(new File(Paths.get(ApiPathConfiguration.PATH_JAR_ERROR_FILE).toUri()));
         pb.directory(selectedFile.getAbsoluteFile());
         try {
             final Process process = pb.start();
@@ -22,9 +22,9 @@ public class JarExecutor {
                 final int exitStatus = process.waitFor();
 
                 if (exitStatus == 0) {
-                    result = LoggerAndJarExecutorConfiguration.PATH_JAR_LOGGER_FILE;
+                    result = ApiPathConfiguration.PATH_JAR_LOGGER_FILE;
                 } else {
-                    result = LoggerAndJarExecutorConfiguration.PATH_JAR_ERROR_FILE;
+                    result = ApiPathConfiguration.PATH_JAR_ERROR_FILE;
                 }
             } catch (InterruptedException | IOException ex) {
                 logger.error("InterruptedException: " + ex.getMessage());

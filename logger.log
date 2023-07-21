@@ -1,0 +1,41 @@
+2023-07-21 14:32:42.684 [INFO ] - Connection success!
+2023-07-21 16:17:32.343 [INFO ] - auth thread waiting for test
+2023-07-21 16:17:32.343 [INFO ] - login thread waiting for test
+2023-07-21 16:17:32.343 [INFO ] - Testing connection....
+2023-07-21 16:17:32.343 [INFO ] - registration thread waiting for test
+2023-07-21 16:17:32.535 [INFO ] - CONNECTION SUCCESS!
+2023-07-21 16:17:32.606 [ERROR] - The User is already taken!
+2023-07-21 16:17:33.224 [INFO ] - Login success!
+2023-07-21 16:17:33.268 [INFO ] - The User have ADMINISTRATOR access.
+2023-07-21 16:17:33.298 [INFO ] - The User have USER access.
+2023-07-21 16:17:33.352 [INFO ] - login thread waiting for test
+2023-07-21 16:17:33.352 [INFO ] - auth thread waiting for test
+2023-07-21 16:17:33.361 [ERROR] - Error! Please check your login or registration!
+2023-07-21 16:17:33.364 [INFO ] - registration thread waiting for test
+2023-07-21 16:17:33.372 [INFO ] - CONNECTION SUCCESS!
+2023-07-21 16:17:33.373 [INFO ] - connection thread releasing inner lock
+2023-07-21 16:17:33.373 [INFO ] - connection thread test done
+2023-07-21 16:17:33.373 [INFO ] - connection thread releasing outer lock
+2023-07-21 16:17:34.356 [INFO ] - auth thread waiting for test
+2023-07-21 16:17:34.356 [INFO ] - Testing login...
+2023-07-21 16:17:34.371 [INFO ] - registration thread waiting for test
+2023-07-21 16:17:35.357 [INFO ] - auth thread waiting for test
+2023-07-21 16:17:35.387 [INFO ] - registration thread waiting for test
+2023-07-21 16:17:35.947 [INFO ] - Login success!
+2023-07-21 16:17:35.947 [INFO ] - login thread releasing inner lock
+2023-07-21 16:17:35.948 [INFO ] - login thread test done
+2023-07-21 16:17:35.948 [INFO ] - login thread releasing outer lock
+2023-07-21 16:17:36.358 [INFO ] - Testing authentication...
+2023-07-21 16:17:36.394 [INFO ] - registration thread waiting for test
+2023-07-21 16:17:37.401 [INFO ] - registration thread waiting for test
+2023-07-21 16:17:37.419 [INFO ] - The User have ADMINISTRATOR access.
+2023-07-21 16:17:37.463 [INFO ] - The User have USER access.
+2023-07-21 16:17:37.549 [ERROR] - Error! Please check your login or registration!
+2023-07-21 16:17:37.549 [INFO ] - auth thread releasing inner lock
+2023-07-21 16:17:37.550 [INFO ] - auth thread test done
+2023-07-21 16:17:37.550 [INFO ] - auth thread releasing outer lock
+2023-07-21 16:17:38.407 [INFO ] - Testing registration...
+2023-07-21 16:17:39.454 [ERROR] - The User is already taken!
+2023-07-21 16:17:39.455 [INFO ] - registration thread releasing inner lock
+2023-07-21 16:17:39.455 [INFO ] - registration thread test done
+2023-07-21 16:17:39.456 [INFO ] - registration thread releasing outer lock

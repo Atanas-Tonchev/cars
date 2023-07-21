@@ -1,6 +1,6 @@
 package com.haemimont.cars.servlet;
-import com.haemimont.cars.api.LoggerAndJarExecutorConfiguration;
-import com.haemimont.cars.api.SingletonLoggerFile;
+import com.haemimont.cars.api.ApiPathConfiguration;
+import com.haemimont.cars.api.LoggerFile;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
@@ -14,9 +14,9 @@ public class LoggerFileJarServlet extends HttpServlet {
         String logg = req.getParameter("logg");
         if (logg != null && logg.equals("true")) {
             resp.setContentType("text/plain");
-            resp.getWriter().write(SingletonLoggerFile.getLoggFile(LoggerAndJarExecutorConfiguration.PATH_JAR_LOGGER_FILE).toString());
+            resp.getWriter().write(LoggerFile.getLoggJarFile().toString());
         }else {
-            req.setAttribute("logg", SingletonLoggerFile.getLoggFile(LoggerAndJarExecutorConfiguration.PATH_JAR_LOGGER_FILE));
+            req.setAttribute("logg", LoggerFile.getLoggJarFile());
             RequestDispatcher dispatcher = req.getRequestDispatcher("apiTests.jsp");
             dispatcher.forward(req,resp);
         }

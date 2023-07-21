@@ -18,7 +18,7 @@ public class ApiResponseMessages {
     public JSONObject getErrorRegMessageUnauthorized(){
         int statusCode = HttpStatus.SC_UNAUTHORIZED;
         JSONObject jo = new JSONObject();
-        jo.put("path","/error");
+        jo.put("loggPath","/error");
         jo.put("error","Unauthorized");
         jo.put("message","Full authentication is required to access this resource");
         jo.put("status",statusCode);
@@ -28,7 +28,7 @@ public class ApiResponseMessages {
     public JSONObject getErrorLoginMessageUnauthorized(){
         int statusCode = HttpStatus.SC_UNAUTHORIZED;
         JSONObject jo = new JSONObject();
-        jo.put("path","/api/auth/signin");
+        jo.put("loggPath","/api/auth/signin");
         jo.put("error","Unauthorized");
         jo.put("message","Bad credentials");
         jo.put("status",statusCode);
@@ -46,7 +46,7 @@ public class ApiResponseMessages {
     public JSONObject getErrorAuthMessageUnauthorized(){
         int statusCode = HttpStatus.SC_UNAUTHORIZED;
         JSONObject jo = new JSONObject();
-        jo.put("path","/error");
+        jo.put("loggPath","/error");
         jo.put("error","Unauthorized");
         jo.put("message","Full authentication is required to access this resource");
         jo.put("status",statusCode);
