@@ -36,12 +36,11 @@ public class LoggerFile {
     public static List<String> getLoggJarFile(String path) {
         //create new list for reverse the data from result list
         List<String> listReverse = new ArrayList<>();
+        //create list to keep data from logg file
         List<String> list = new ArrayList<>();
         //try with resources to auto close FileReader and BufferedReader
         try (FileReader fr = new FileReader(path);
              BufferedReader reader = new BufferedReader(fr)) {
-            //create list to keep data from logg file
-
             String line;
             while ((line = reader.readLine()) != null) {
                 //line by line add in to list
