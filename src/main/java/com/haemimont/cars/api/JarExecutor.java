@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.List;
 public class JarExecutor {
     private static final Logger logger = LogManager.getLogger(JarExecutor.class);
-    private static String result;
 
     public static List<String> startExtJarProgram() {
         List<String> listReverse = new ArrayList<>();
@@ -22,28 +21,16 @@ public class JarExecutor {
             final int exitStatus = process.waitFor();
 
             if (exitStatus == 0) {
-                result = ApiPathConfiguration.PATH_JAR_LOGGER_FILE;
+                listReverse = LoggerFile.getLoggJarFile(ApiPathConfiguration.PATH_JAR_LOGGER_FILE);
             } else {
-                result = ApiPathConfiguration.PATH_JAR_ERROR_FILE;
+                listReverse = LoggerFile.getLoggJarFile(ApiPathConfiguration.PATH_JAR_ERROR_FILE);
             }
+
         } catch (InterruptedException | IOException ex) {
             logger.error("InterruptedException: " + ex.getMessage());
         }
 
-        try (FileReader fr = new FileReader(result);
-             BufferedReader reader = new BufferedReader(fr)) {
-            List<String> list = new ArrayList<>();
-            String line;
-            while ((line = reader.readLine()) != null) {
-                list.add(line);
-            }
-            for (int i = list.size() - 1; i > 0; i--) {
-                listReverse.add(list.get(i));
-            }
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        return listReverse.subList(listReverse.size() - 200, listReverse.size());
+        return listReverse;
     }
 }
 

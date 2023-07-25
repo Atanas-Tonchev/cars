@@ -1,18 +1,10 @@
 package com.haemimont.cars.tests;
 import com.haemimont.cars.api.*;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 public class MultiThreadTest {
-    private static final Logger logger = LogManager.getLogger(MultiThreadTest.class);
     private static final UnitTestApi test = new UnitTestApi();
-    private static final ReentrantLock rel = new ReentrantLock();
     private final Lock lock = new ReentrantLock();
 
     public void getThreadTestApi(ApiObjectUtil objectUtil) throws InterruptedException {
@@ -66,7 +58,7 @@ public class MultiThreadTest {
         auth.join();
     }
 
-    public void getThreadTestApiInnerLock(ApiObjectUtil apiObjectUtil) {
+    /*public void getThreadTestApiInnerLock(ApiObjectUtil apiObjectUtil) {
 
         ExecutorService pool
                 = Executors.newFixedThreadPool(4);
@@ -273,22 +265,5 @@ public class MultiThreadTest {
         pool.execute(login);
         pool.execute(auth);
         pool.shutdown();
-    }
-
-    public static void main(String[] args) throws InterruptedException {
-        String username = "Atanas1990";
-        String pass = "betimoni2215";
-        String email = "rrrrrrrsjsf@example.com";
-        List<String> userRoles = new ArrayList<>();
-        userRoles.add(UserRole.MODERATOR);
-        userRoles.add(UserRole.USER);
-        ApiObjectUtil req = new ApiObjectUtil(new ApiRegistration(username,pass,email, userRoles),
-                new ApiLogin(username,pass),
-                new ApiAuthorization());
-
-        MultiThreadTest test = new MultiThreadTest();
-        test.getThreadTestApiInnerLock(req);
-        test.getThreadTestApi(req);
-
-    }
+    }*/
 }

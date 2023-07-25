@@ -39,3 +39,6 @@
 2023-07-21 16:17:39.455 [INFO ] - registration thread releasing inner lock
 2023-07-21 16:17:39.455 [INFO ] - registration thread test done
 2023-07-21 16:17:39.456 [INFO ] - registration thread releasing outer lock
+2023-07-25 12:25:12.365 [ERROR] - InterruptedException: Cannot run program "java" (in directory "C:\Users\User\Desktop\nasko\logger.log"): CreateProcess error=267, The directory name is invalid
+2023-07-25 12:27:51.179 [ERROR] - InterruptedException: Cannot run program "java" (in directory "C:\Users\User\Desktop\nasko\logger.log"): CreateProcess error=267, The directory name is invalid
+2023-07-25 12:29:59.484 [ERROR] - InterruptedException: Cannot run program "java" (in directory "C:\Users\User\Desktop\nasko\logger.log"): CreateProcess error=267, The directory name is invalid
