@@ -1,5 +1,4 @@
 package com.haemimont.cars.servlet;
-import com.haemimont.cars.api.ApiPathConfiguration;
 import com.haemimont.cars.api.LoggerFile;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;

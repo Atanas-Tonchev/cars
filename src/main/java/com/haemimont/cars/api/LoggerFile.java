@@ -4,53 +4,56 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
 public class LoggerFile {
 
     public static List<String> getLoggApiFile() {
+        //call singleton
         SingletonApiLoggFile singletonApiLoggFile = SingletonApiLoggFile.getApiLoggFile();
-        List<String> listLogs = new ArrayList<>();
-        BufferedReader reader;
-        try {
-            reader = new BufferedReader(new FileReader(singletonApiLoggFile.loggPath));
+        //create new list for reverse the data from result list
+        List<String> listReverse = new ArrayList<>();
+        //try with resources to auto close FileReader and BufferedReader
+        try (FileReader fr = new FileReader(singletonApiLoggFile.loggPath);
+             BufferedReader reader = new BufferedReader(fr)) {
+            //create list to keep data from logg file
             List<String> list = new ArrayList<>();
             String line;
-            while((line = reader.readLine())!= null) {
+            while ((line = reader.readLine()) != null) {
+                //line by line add in to list
                 list.add(line);
             }
-            for (int i = list.size()-1; i > 0; i--){
-                listLogs.add(list.get(i));
+            for (int i = list.size() - 1; i > 0; i--) {
+                //reverse list and add to listReverse
+                listReverse.add(list.get(i));
             }
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-
-        if (listLogs.size()<=30) {
-            return listLogs;
-        }else {
-            return listLogs.subList(0,30);
-        }
+        //return the last 200 lines in logg file
+        return listReverse.subList(listReverse.size() - 200, listReverse.size());
     }
+
     public static List<String> getLoggJarFile() {
-        List<String> listLogs = new ArrayList<>();
-        BufferedReader reader;
-        try {
-            reader = new BufferedReader(new FileReader(ApiPathConfiguration.PATH_JAR_LOGGER_FILE));
+        //create new list for reverse the data from result list
+        List<String> listReverse = new ArrayList<>();
+        //try with resources to auto close FileReader and BufferedReader
+        try (FileReader fr = new FileReader(ApiPathConfiguration.PATH_JAR_LOGGER_FILE);
+             BufferedReader reader = new BufferedReader(fr)) {
+            //create list to keep data from logg file
             List<String> list = new ArrayList<>();
             String line;
-            while((line = reader.readLine())!= null) {
+            while ((line = reader.readLine()) != null) {
+                //line by line add in to list
                 list.add(line);
             }
-            for (int i = list.size()-1; i > 0; i--){
-                listLogs.add(list.get(i));
+            for (int i = list.size() - 1; i > 0; i--) {
+                //reverse list and add to listReverse
+                listReverse.add(list.get(i));
             }
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-
-        if (listLogs.size()<=30) {
-            return listLogs;
-        }else {
-            return listLogs.subList(0,30);
-        }
+        //return the last 200 lines in logg file
+        return listReverse.subList(listReverse.size() - 200, listReverse.size());
     }
 }

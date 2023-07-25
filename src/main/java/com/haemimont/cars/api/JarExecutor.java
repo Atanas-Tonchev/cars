@@ -10,7 +10,7 @@ public class JarExecutor {
     private static String result;
 
     public static List<String> startExtJarProgram() {
-        List<String> resultList = new ArrayList<>();
+        List<String> listReverse = new ArrayList<>();
         String[] commands = {"java", "-jar", "cars.jar"};
         ProcessBuilder pb = new ProcessBuilder(commands);
         File selectedFile = new File(ApiPathConfiguration.PATH_JAR_FILE);
@@ -19,37 +19,31 @@ public class JarExecutor {
         try {
             final Process process = pb.start();
 
-                final int exitStatus = process.waitFor();
+            final int exitStatus = process.waitFor();
 
-                if (exitStatus == 0) {
-                    result = ApiPathConfiguration.PATH_JAR_LOGGER_FILE;
-                } else {
-                    result = ApiPathConfiguration.PATH_JAR_ERROR_FILE;
-                }
-            } catch (InterruptedException | IOException ex) {
-                logger.error("InterruptedException: " + ex.getMessage());
+            if (exitStatus == 0) {
+                result = ApiPathConfiguration.PATH_JAR_LOGGER_FILE;
+            } else {
+                result = ApiPathConfiguration.PATH_JAR_ERROR_FILE;
             }
+        } catch (InterruptedException | IOException ex) {
+            logger.error("InterruptedException: " + ex.getMessage());
+        }
 
-        BufferedReader reader;
-        try {
-            reader = new BufferedReader(new FileReader(result));
+        try (FileReader fr = new FileReader(result);
+             BufferedReader reader = new BufferedReader(fr)) {
             List<String> list = new ArrayList<>();
             String line;
-            while((line = reader.readLine())!= null) {
+            while ((line = reader.readLine()) != null) {
                 list.add(line);
             }
-            for (int i = list.size()-1; i > 0; i--){
-                    resultList.add(list.get(i));
+            for (int i = list.size() - 1; i > 0; i--) {
+                listReverse.add(list.get(i));
             }
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-
-        if (resultList.size()<=200) {
-            return resultList;
-        }else {
-            return resultList.subList(0,200);
-        }
+        return listReverse.subList(listReverse.size() - 200, listReverse.size());
     }
 }
 
