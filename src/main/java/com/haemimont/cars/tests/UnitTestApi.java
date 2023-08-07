@@ -72,26 +72,20 @@ public class UnitTestApi {
 
         if(myHttpClient.authTestAdmin().body().equals(messages.getSuccessAuthAdminMessage())){
             logger.info("The User have ADMINISTRATOR access.");
-        }else if(myHttpClient.authTestAdmin().body().equals(messages.getErrorAuthMessageUnauthorized().toString())) {
-            logger.error("The User doesn't have ADMINISTRATOR access.");
         }else {
-            logger.error("Error! Please check your login or registration!");
+            logger.error("The User doesn't have ADMINISTRATOR access.");
         }
 
         if(myHttpClient.authTestUser().body().equals(messages.getSuccessAuthUserMessage())){
             logger.info("The User have USER access.");
-        }else if(myHttpClient.authTestUser().body().equals(messages.getErrorAuthMessageUnauthorized().toString())) {
-            logger.error("The User doesn't have USER access.");
         }else {
-            logger.error("Error! Please check your login or registration!");
+            logger.error("The User doesn't have USER access.");
         }
 
         if(myHttpClient.authTestModerator().body().equals(messages.getSuccessAuthModMessage())){
             logger.info("The User have MODERATOR access.");
-        }else if(myHttpClient.authTestModerator().body().equals(messages.getErrorAuthMessageUnauthorized().toString())) {
-            logger.error("The User doesn't have MODERATOR access.");
         }else {
-            logger.error("Error! Please check your login or registration!");
+            logger.error("The User doesn't have MODERATOR access.");
         }
     }
 

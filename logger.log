@@ -42,3 +42,69 @@
 2023-07-25 12:25:12.365 [ERROR] - InterruptedException: Cannot run program "java" (in directory "C:\Users\User\Desktop\nasko\logger.log"): CreateProcess error=267, The directory name is invalid
 2023-07-25 12:27:51.179 [ERROR] - InterruptedException: Cannot run program "java" (in directory "C:\Users\User\Desktop\nasko\logger.log"): CreateProcess error=267, The directory name is invalid
 2023-07-25 12:29:59.484 [ERROR] - InterruptedException: Cannot run program "java" (in directory "C:\Users\User\Desktop\nasko\logger.log"): CreateProcess error=267, The directory name is invalid
+2023-08-07 15:39:48.432 [INFO ] - CONNECTION SUCCESS!
+2023-08-07 15:39:49.107 [INFO ] - Login success!
+2023-08-07 15:39:49.139 [ERROR] - The User is already taken!
+2023-08-07 15:39:49.176 [INFO ] - The User have ADMINISTRATOR access.
+2023-08-07 15:39:49.203 [INFO ] - The User have USER access.
+2023-08-07 15:39:49.259 [ERROR] - Error! Please check your login or registration!
+2023-08-07 15:41:14.118 [INFO ] - Login success!
+2023-08-07 15:41:14.150 [INFO ] - The User have ADMINISTRATOR access.
+2023-08-07 15:41:14.177 [INFO ] - The User have USER access.
+2023-08-07 15:41:14.237 [ERROR] - Error! Please check your login or registration!
+2023-08-07 15:41:14.257 [INFO ] - CONNECTION SUCCESS!
+2023-08-07 15:41:14.286 [ERROR] - The User is already taken!
+2023-08-07 15:42:08.088 [INFO ] - Login success!
+2023-08-07 15:42:08.119 [INFO ] - The User have ADMINISTRATOR access.
+2023-08-07 15:42:08.145 [INFO ] - The User have USER access.
+2023-08-07 15:42:08.200 [ERROR] - Error! Please check your login or registration!
+2023-08-07 15:42:08.238 [ERROR] - The User is already taken!
+2023-08-07 15:42:08.263 [INFO ] - CONNECTION SUCCESS!
+2023-08-07 15:44:05.467 [INFO ] - Login success!
+2023-08-07 15:44:05.502 [INFO ] - The User have ADMINISTRATOR access.
+2023-08-07 15:44:05.529 [INFO ] - The User have USER access.
+2023-08-07 15:44:05.590 [ERROR] - Error! Please check your login or registration!
+2023-08-07 15:44:05.621 [ERROR] - The User is already taken!
+2023-08-07 15:44:05.636 [INFO ] - CONNECTION SUCCESS!
+2023-08-07 15:45:38.927 [INFO ] - CONNECTION SUCCESS!
+2023-08-07 15:45:38.991 [ERROR] - The User is already taken!
+2023-08-07 15:45:39.582 [INFO ] - Login success!
+2023-08-07 15:45:39.608 [INFO ] - The User have ADMINISTRATOR access.
+2023-08-07 15:45:39.635 [INFO ] - The User have USER access.
+2023-08-07 15:45:39.693 [ERROR] - Error! Please check your login or registration!
+2023-08-07 15:46:15.075 [INFO ] - CONNECTION SUCCESS!
+2023-08-07 15:46:15.139 [ERROR] - The User is already taken!
+2023-08-07 15:46:15.765 [INFO ] - Login success!
+2023-08-07 15:46:15.790 [INFO ] - The User have ADMINISTRATOR access.
+2023-08-07 15:46:15.815 [INFO ] - The User have USER access.
+2023-08-07 15:46:15.882 [ERROR] - Error! Please check your login or registration!
+2023-08-07 15:49:47.862 [INFO ] - CONNECTION SUCCESS!
+2023-08-07 15:49:48.506 [INFO ] - Registration success!
+2023-08-07 15:49:49.082 [INFO ] - Login success!
+2023-08-07 15:49:49.135 [ERROR] - Error! Please check your login or registration!
+2023-08-07 15:49:49.163 [INFO ] - The User have USER access.
+2023-08-07 15:49:49.192 [INFO ] - The User have MODERATOR access.
+2023-08-07 15:51:50.128 [INFO ] - CONNECTION SUCCESS!
+2023-08-07 15:51:50.190 [ERROR] - The User is already taken!
+2023-08-07 15:51:50.825 [INFO ] - Login success!
+2023-08-07 15:51:50.852 [ERROR] - The User doesn't have ADMINISTRATOR access.
+2023-08-07 15:51:50.876 [INFO ] - The User have USER access.
+2023-08-07 15:51:50.901 [INFO ] - The User have MODERATOR access.
+2023-08-07 15:52:32.420 [INFO ] - CONNECTION SUCCESS!
+2023-08-07 15:52:32.481 [ERROR] - The User is already taken!
+2023-08-07 15:52:33.115 [INFO ] - Login success!
+2023-08-07 15:52:33.141 [INFO ] - The User have ADMINISTRATOR access.
+2023-08-07 15:52:33.167 [INFO ] - The User have USER access.
+2023-08-07 15:52:33.196 [ERROR] - The User doesn't have MODERATOR access.
+2023-08-07 15:53:33.552 [INFO ] - CONNECTION SUCCESS!
+2023-08-07 15:53:33.626 [ERROR] - The User is already taken!
+2023-08-07 15:53:34.250 [INFO ] - Login success!
+2023-08-07 15:53:34.275 [INFO ] - The User have ADMINISTRATOR access.
+2023-08-07 15:53:34.301 [INFO ] - The User have USER access.
+2023-08-07 15:53:34.328 [ERROR] - The User doesn't have MODERATOR access.
+2023-08-07 15:53:55.784 [INFO ] - CONNECTION SUCCESS!
+2023-08-07 15:53:55.850 [ERROR] - The User is already taken!
+2023-08-07 15:53:56.499 [INFO ] - Login success!
+2023-08-07 15:53:56.527 [INFO ] - The User have ADMINISTRATOR access.
+2023-08-07 15:53:56.565 [INFO ] - The User have USER access.
+2023-08-07 15:53:56.597 [ERROR] - The User doesn't have MODERATOR access.

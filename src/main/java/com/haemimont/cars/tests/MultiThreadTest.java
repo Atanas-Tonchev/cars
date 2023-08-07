@@ -8,6 +8,7 @@ public class MultiThreadTest {
     private final Lock lock = new ReentrantLock();
 
     public void getThreadTestApi(ApiObjectUtil objectUtil) throws InterruptedException {
+
         Thread connection = new Thread(() -> {
             lock.lock();
             try {
@@ -29,6 +30,7 @@ public class MultiThreadTest {
                 lock.unlock();
             }
         });
+        registration.setPriority(6);
         registration.start();
         Thread login = new Thread(() -> {
             lock.lock();
@@ -40,6 +42,7 @@ public class MultiThreadTest {
                 lock.unlock();
             }
         });
+        login.setPriority(6);
         login.start();
         Thread auth = new Thread(() -> {
             lock.lock();
@@ -51,6 +54,7 @@ public class MultiThreadTest {
                 lock.unlock();
             }
         });
+        auth.setPriority(7);
         auth.start();
         connection.join();
         registration.join();
